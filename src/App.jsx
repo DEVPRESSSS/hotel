@@ -1,13 +1,13 @@
 
 import './App.css'
+import { NavBarDefault } from './components/Navbar'
 
 function App() {
 
   return (
     <>
       
-      <h3 className='text-2xl text-teal-500 text-center'>
-          First React Project</h3>
+      <NavBarDefault/> 
       
     </>
   )
