@@ -8,7 +8,8 @@ export default function App() {
     <>
     <div className="min-h-screen flex flex-col">
         <NavBarDefault/> 
-          <main className="grow bg-gray-100 m-2 rounded-lg">
+          {/* <main className="grow bg-gray-100 m-2 rounded-lg"> */}
+          <main className="grow m-2 rounded-lg">
             {
 
             }

@@ -1,5 +1,5 @@
 import { AuthDefault } from "./Auth";
-import logo from "../assets/hero.png";
+import logo from "../assets/react.svg";
 
 export function NavBarDefault() {
 
@@ -7,16 +7,17 @@ export function NavBarDefault() {
         { title: 'Home', id: 1 },
         { title: 'About Us', id: 2 },
         { title: 'Services', id: 3 },
+        { title: '+639305959605', id: 3 },
         { title: 'Book Now', id: 4 },
     ];
 
     return (
-        <div className="w-full flex items-center shadow-sm px-4 h-16">
+        <div className="w-full flex items-center border border-b-2 border-gray-100 px-4 h-16">
 
             {/* Logo + Company Name */}
             <div className="flex items-center gap-2 flex-1">
                 <img src={logo} alt="company logo" className="w-10 h-10 object-contain" />
-                <h4 className="text-purple-700 font-bold whitespace-nowrap">Royal Park</h4>
+                <h4 className="text-teal-700 font-bold whitespace-nowrap">Royal Park</h4>
             </div>
 
             {/* Center Nav */}
@@ -25,11 +26,11 @@ export function NavBarDefault() {
                     <li
                         key={p.id}
                         className={`
-                            px-4 py-2 rounded-lg text-sm whitespace-nowrap cursor-pointer
+                            px-4 py-2 rounded-xl text-sm whitespace-nowrap cursor-pointer
                             transition-all duration-200
                             ${p.title === "Book Now"
-                                ? "bg-purple-700 text-white"
-                                : "hover:text-purple-700"}
+                                ? "bg-teal-700 text-white"
+                                : "hover:text-teal-600"}
                         `}
                     >
                         {p.title}
