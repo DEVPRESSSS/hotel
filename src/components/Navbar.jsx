@@ -19,6 +19,7 @@ export function NavBarDefault() {
     <header className="w-full border-b border-gray-100 bg-white sticky top-0 z-50">
       <div className="flex items-center h-16 px-6 gap-4">
 
+        
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <img src={logo} alt="Royal Park logo" className="w-9 h-9 object-contain" />
@@ -58,12 +59,13 @@ export function NavBarDefault() {
           </Link>
         </nav>
 
+
         {/* Auth — desktop */}
         <div className="hidden md:flex items-center gap-2 shrink-0">
-          <button className="px-3.5 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-50
+          <Link to="/login" className="px-3.5 py-2 rounded-lg text-sm text-gray-500 hover:bg-gray-50
                              hover:text-gray-800 transition-colors duration-150">
             Log in
-          </button>
+          </Link>
           <button className="px-3.5 py-2 rounded-lg text-sm border border-gray-200
                              text-gray-700 hover:bg-gray-50 transition-colors duration-150">
             Sign up
