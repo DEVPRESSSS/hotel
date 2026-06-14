@@ -1,80 +1,116 @@
 import hotelImage from "../../assets/hotel.jpg";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useLogin } from "../../hooks/useLogin";
 
 export function LoginPage() {
-    return (
-        <div className="flex flex-1 justify-center items-center p-4 w-full h-full">
-            <div className="flex max-w-2xl w-full rounded-lg shadow-sm gap-6">
+  const { handleSubmit, loading } = useLogin();
 
-                <div className="hidden sm:flex flex-1 justify-center items-center bg-white p-0">
-                    <img
-                        src={hotelImage}
-                        alt="Hotel"
-                        className="max-h-96 object-contain rounded-sm"
-                    />
-                </div>
-                <div className="flex-1 p-4">
-                    <h1 className="text-lg font-bold text-center text-teal-700 mb-6">
-                        Welcome - HMS
-                    </h1>
-                    <div className="flex items-center border border-gray-100 rounded-md px-3 py-1 mt-4">
-                        <div className="mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#00796b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <rect x="2" y="4" width="20" height="16" rx="2"/>
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
-                            </svg>                       
-                        </div>
-                        <input
-                            type="text"
-                            placeholder="example@gmail.com"
-                            className="w-full outline-none"
-                        />
-                    </div>
-                    
-                    <div className="flex items-center border border-gray-100 rounded-md px-3 py-1 mt-4">
-                        <div className="mr-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="#00796b" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2"/>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
-                            </svg>                        
-                        </div>
+  return (
+    <div className="flex min-h-screen items-center justify-center p-6 bg-gray-50">
+      <div className="flex w-full max-w-4xl overflow-hidden rounded-2xl bg-white shadow-sm">
 
-                        <input
-                            type="password"
-                            placeholder="Enter your password"
-                            className="w-full outline-none"
-                        />
-                    </div>
-
-                    <div className="flex justify-end mt-1">
-
-                        <Link to ="/forgotpassword"
-                            className="text-sm text-teal-700 italic underline"
-                            >
-                                forgot password?
-                        </Link>
-                    </div>
-                    <div className="w-full mt-2">
-                        <button type="submit"
-                                className="bg-teal-800 hover:bg-teal-700 transition-colors py-2 rounded-lg text-white w-full cursor-pointer">
-                                Sign In
-                        </button>
-                    </div>
-                    <div className="flex justify-center mt-1">
-
-                        <Link to= "/register"
-                            className="text-sm  text-gray-500 italic underline"
-                            >
-                                Dont have an account? <span>
-                                    Register here
-                                </span>
-                        </Link>
-                    </div>
-                </div>
-
-                
-
-            </div>
+        {/* Left Side Image */}
+        <div className="hidden md:flex flex-1">
+          <img
+            src={hotelImage}
+            alt="Hotel"
+            className="h-full w-full object-cover"
+          />
         </div>
-    );
+
+        {/* Right Side */}
+        <div className="flex flex-1 flex-col justify-center p-8">
+
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl font-bold text-gray-800">
+              Welcome Back
+            </h1>
+            <p className="mt-2 text-sm text-gray-500">
+              Sign in to continue to your account.
+            </p>
+          </div>
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+            {/* Email */}
+            <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-3 h-5 w-5 text-teal-700"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="2" />
+                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+              </svg>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                className="w-full outline-none"
+              />
+            </div>
+
+            {/* Password */}
+            <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-3 h-5 w-5 text-teal-700"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+              >
+                <rect x="3" y="11" width="18" height="11" rx="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className="w-full outline-none"
+              />
+            </div>
+
+            {/* Forgot Password */}
+            <div className="flex justify-end">
+              <Link
+                to="/forgotpassword"
+                className="text-sm text-teal-700 hover:underline"
+              >
+                Forgot password?
+              </Link>
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-lg bg-teal-700 py-3 font-medium text-white transition hover:bg-teal-800 disabled:opacity-60"
+            >
+              {loading ? "Signing In..." : "Sign In"}
+            </button>
+          </form>
+
+          {/* Register */}
+          <div className="mt-6 text-center text-sm text-gray-500">
+            Don't have an account?{" "}
+            <Link
+              to="/register"
+              className="font-medium text-teal-700 hover:underline"
+            >
+              Register here
+            </Link>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 }

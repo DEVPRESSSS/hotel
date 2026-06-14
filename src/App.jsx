@@ -7,6 +7,7 @@ import { HomePage } from './pages/Home';
 import { AboutPage } from './pages/AboutUs';
 import { BookPage } from './pages/Book';
 import { LoginPage } from './pages/Auth/Login';
+import { RoomPage } from './pages/Admin/Room';
 export default function App() {
 
   return (
@@ -15,13 +16,15 @@ export default function App() {
       <div className="min-h-screen flex flex-col">
           <NavBarDefault/> 
             {/* <main className="grow bg-gray-100 m-2 rounded-lg"> */}
-            <main className="flex-1 flex flex-col">
+            <main className="flex-1 flex flex-col m-5">
                             
             <Routes>
               <Route path="/" element = {<HomePage/>} />
               <Route path="/about" element={<AboutPage/>}/>
               <Route path="/book" element={<BookPage/>}/>
               <Route path="/login" element ={<LoginPage/>} />
+              <Route path="/room" element ={<RoomPage/>} />
+              <Route path="/addroom" element ={<AboutPage/>} />
             </Routes>
               
             </main>

@@ -9,11 +9,12 @@ export function FooterSection() {
 
                 {/* Brand column */}
                 <div className="flex flex-col gap-3">
-                    <h3 className="text-lg font-semibold tracking-wide">Royal Park</h3>
+                    <h3 className="text-sm uppercase font-semibold tracking-wide">Royal Park</h3>
                     <p className="text-teal-200 text-sm leading-relaxed">
                         Experience comfort and elegance in the heart of the city. Your home away from home.
                     </p>
-                    <a href="tel:+639305959605" className="text-teal-300 text-sm hover:text-white transition-colors">
+                    <a href="tel:+639305959605" className="text-teal-300 text-sm
+                         hover:text-white transition-colors">
                         +63 930 595 9605
                     </a>
                 </div>

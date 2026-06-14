@@ -6,6 +6,7 @@ const NAV_LINKS = [
   { title: "Home",     path: "/" },
   { title: "About Us", path: "/about" },
   { title: "Services", path: "/services" },
+  { title: "Rooms", path: "/room" },
 ];
 
 export function NavBarDefault() {
@@ -16,7 +17,7 @@ export function NavBarDefault() {
     path === "/" ? location.pathname === "/" : location.pathname.startsWith(path);
 
   return (
-    <header className="w-full border-b border-gray-100 bg-white sticky top-0 z-50">
+    <header className="w-full border-b border-gray-100 bg-white sticky top-0 z-50 border-none">
       <div className="flex items-center h-16 px-6 gap-4">
 
         
@@ -34,7 +35,8 @@ export function NavBarDefault() {
             <Link
               key={path}
               to={path}
-              className={`px-3.5 py-2 rounded-lg text-sm transition-colors duration-150 whitespace-nowrap
+              className={`px-3.5 py-2 rounded-lg  text-gray-500
+                  text-sm  transition-colors duration-150 whitespace-nowrap
                 ${isActive(path)
                   ? "bg-teal-50 text-teal-700 font-medium"
                   : "text-gray-500 hover:bg-gray-50 hover:text-gray-800"
