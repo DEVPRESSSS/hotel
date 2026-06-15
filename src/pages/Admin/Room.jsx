@@ -1,5 +1,6 @@
 import { Table } from "../../components/Table/Table";
 import GetRooms from "../../api/RoomApi";
+
 export function RoomPage(){
 
     const tableHeader = [

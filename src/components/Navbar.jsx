@@ -68,10 +68,10 @@ export function NavBarDefault() {
                              hover:text-gray-800 transition-colors duration-150">
             Log in
           </Link>
-          <button className="px-3.5 py-2 rounded-lg text-sm border border-gray-200
+          <Link to="/register" className="px-3.5 py-2 rounded-lg text-sm border border-gray-200
                              text-gray-700 hover:bg-gray-50 transition-colors duration-150">
             Sign up
-          </button>
+          </Link>
         </div>
 
         {/* Hamburger — mobile */}

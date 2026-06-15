@@ -1,12 +1,12 @@
 // hooks/useLogin.js
 import { useState } from "react";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
- // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -17,8 +17,13 @@ export function useLogin() {
     const password = e.target.password.value;
 
     try {
-      await login(email, password);
-      alert(`Welcome User!!!!`);
+      const response = await login(email, password);
+     
+      if(response.roleName === "Admin"){
+          navigate("/dashboard");
+      }else if(response.roleName === "Customer"){
+          navigate("/guestdashboard");
+      }
     } catch (err) {
       alert(`${err.message}`);
     } finally {

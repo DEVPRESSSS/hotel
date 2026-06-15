@@ -6,8 +6,12 @@ import { Route, Routes} from "react-router-dom";
 import { HomePage } from './pages/Home';
 import { AboutPage } from './pages/AboutUs';
 import { BookPage } from './pages/Book';
+
 import { LoginPage } from './pages/Auth/Login';
 import { RoomPage } from './pages/Admin/Room';
+import { RegisterPage } from './pages/Auth/Register';
+import { MainPage } from './pages/Admin/AdminMainLayout';
+import { GuestDashboardPage } from './pages/Guest/GuestDashboard';
 export default function App() {
 
   return (
@@ -23,9 +27,13 @@ export default function App() {
               <Route path="/about" element={<AboutPage/>}/>
               <Route path="/book" element={<BookPage/>}/>
               <Route path="/login" element ={<LoginPage/>} />
+              <Route path="/register" element ={<RegisterPage/>} />
               <Route path="/room" element ={<RoomPage/>} />
               <Route path="/addroom" element ={<AboutPage/>} />
+              <Route path="/dashboard" element ={<MainPage/>} />
+              <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
             </Routes>
+            
               
             </main>
           <FooterSection/>
