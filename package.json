@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
-    "@tanstack/react-table": "^8.21.3",
     "react": "^19.2.6",
+    "react-data-table-component": "^8.4.0",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.16.0",
     "tailwindcss": "^4.3.0"
