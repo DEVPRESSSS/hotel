@@ -1,7 +1,8 @@
 import {DataTablePage} from "../../components/Table/ReactDataTable.jsx"
 import { useRooms } from "../../hooks/useRooms.js";
 import { ActionButtonComponent } from "../../components/Buttons/ActionButton.jsx";
-export function RoomPage(){
+
+export function PermissionPage(){
     const {rooms} = useRooms();
     
     const roomData = rooms.map(room => ({

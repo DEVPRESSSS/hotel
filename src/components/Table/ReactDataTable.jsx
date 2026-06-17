@@ -3,12 +3,13 @@ import { Link  } from 'react-router-dom';
 
 export function DataTablePage(props){
     return (
-       <div className="bg-white rounded-lg p-4 shadow-sm">
+       <div className="bg-white rounded-lg p-4 shadow-sm border-t-4 border-teal-600">
 
             {/* Header */}
-            <div className="flex items-center justify-between mb-4">
-                <h6 className="font-semibold text-gray-700 capitalize">
-                    {props.name} Management
+            <div className="flex items-center justify-between mb-2 p-2
+                    border-b-2 border-gray-100">
+                <h6 className="font-semibold text-gray-700 ">
+                    Manage {props.name.toLowerCase()} 
                 </h6>
                 <Link
                     to="/addroom"
@@ -26,7 +27,7 @@ export function DataTablePage(props){
                 pagination
                 paginationPerPage={5}
                 responsive
-                
+                highlightOnHover
             />
 
         </div>

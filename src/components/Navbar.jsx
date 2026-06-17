@@ -7,6 +7,9 @@ const NAV_LINKS = [
   { title: "About Us", path: "/about" },
   { title: "Services", path: "/services" },
   { title: "Rooms", path: "/room" },
+  { title: "Types", path: "/type" },
+  { title: "Permissions", path: "/permission" },
+  { title: "Role Permission", path: "/rolepermission" },
 ];
 
 export function NavBarDefault() {
