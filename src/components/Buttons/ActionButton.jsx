@@ -1,9 +1,12 @@
-export function ActionButtonComponent({ onEdit, onDelete }) {
+export function ActionButtonComponent({ onEdit, onDelete, buttonToHide }) {
     return (
         <div className="flex items-center justify-center gap-2 p-1">
             <button
                 onClick={onEdit}
-                className="w-16 rounded-lg bg-teal-700 p-2 text-white cursor-pointer hover:bg-teal-800"
+                hidden = { buttonToHide == "Edit" ? true : false}
+                className="w-16 rounded-lg bg-teal-700 p-2
+                 text-white cursor-pointer hover:bg-teal-800
+                 "
             >
                 Edit
             </button>

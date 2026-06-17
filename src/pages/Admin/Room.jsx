@@ -1,6 +1,7 @@
 import {DataTablePage} from "../../components/Table/ReactDataTable.jsx"
 import { useRooms } from "../../hooks/useRooms.js";
 import { ActionButtonComponent } from "../../components/Buttons/ActionButton.jsx";
+
 export function RoomPage(){
     const {rooms} = useRooms();
     

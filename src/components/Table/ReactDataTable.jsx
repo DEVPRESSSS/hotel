@@ -16,7 +16,7 @@ export function DataTablePage(props){
                     className="text-sm border-2 border-teal-700 text-teal-700 px-4 py-1.5 rounded-lg
                                hover:bg-teal-700 hover:text-white transition-colors duration-150"
                 >
-                    Create {props.name.toLowerCase()}
+                    + Create {props.name.toLowerCase()}
                 </Link>
             </div>
 
