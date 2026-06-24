@@ -1,7 +1,9 @@
 import {DataTablePage} from "../../components/Table/ReactDataTable.jsx"
 import { useRooms } from "../../hooks/useRooms.js";
 import { ActionButtonComponent } from "../../components/Buttons/ActionButton.jsx";
-
+import { TableWrapperPage } from "../../components/Table/TableWrapper.jsx";
+import { CreateButton } from "../../components/Buttons/CreateButton.jsx";
+import { useRedirect } from "../../hooks/useCustomNavigate.js";
 export function RoomPage(){
     const {rooms} = useRooms();
     
@@ -54,13 +56,18 @@ export function RoomPage(){
         sortable: false,
     },
     ];
+    
+    //Call redirect
+    const redirect = useRedirect();
     return (
-        <>
+        <TableWrapperPage 
+            title= "Room management"
+            headerAction={<CreateButton name = "Room" 
+                        onClick={() => redirect("/upsert", {entityName: "room"}) }/>}
+            >
             <DataTablePage
-                name="Room"
                 columns={columns}
-                data={roomData}
-            />         
-        </>
+                data={roomData}/>         
+        </TableWrapperPage>      
     )
 }

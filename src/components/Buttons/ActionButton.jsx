@@ -1,4 +1,4 @@
-export function ActionButtonComponent({ onEdit, onDelete, buttonToHide }) {
+export function ActionButtonComponent({ onEdit, onDelete, buttonToHide}) {
     return (
         <div className="flex items-center justify-center gap-2 p-1">
             <button

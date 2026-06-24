@@ -12,6 +12,7 @@ import { PermissionPage } from './pages/Admin/Permissions/Permission';
 import { RegisterPage } from './pages/Auth/Register';
 import { MainPage } from './pages/Admin/AdminMainLayout';
 import { GuestDashboardPage } from './pages/Guest/GuestDashboard';
+import { UpsertFormPage } from './components/Forms/UpsertForm';
 export default function App() {
 
   return (
@@ -33,6 +34,7 @@ export default function App() {
               <Route path="/dashboard" element ={<MainPage/>} />
               <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
               <Route path="/permission" element ={<PermissionPage/>} />
+              <Route path="/upsert" element ={<UpsertFormPage/>} />
             </Routes>
             
               

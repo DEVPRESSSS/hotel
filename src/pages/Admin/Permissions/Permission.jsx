@@ -1,6 +1,9 @@
 import { DataTablePage } from "../../../components/Table/ReactDataTable";
 import { usePermission } from "../../../hooks/usePermission";
 import { ActionButtonComponent } from "../../../components/Buttons/ActionButton";
+import { TableWrapperPage } from "../../../components/Table/TableWrapper";
+import {CreateButton} from "../../../components/Buttons/CreateButton"
+import { useRedirect } from "../../../hooks/useCustomNavigate";
 
 export function PermissionPage(){
     const {permissions} = usePermission();
@@ -11,9 +14,7 @@ export function PermissionPage(){
         createdAt: p.createdAt ? new Date(p.createdAt).toISOString().split("T")[0] : "",
         updatedAt: p.updatedAt ? new Date(p.updatedAt).toISOString().split("T")[0] : "",
         action:<ActionButtonComponent 
-                buttonToHide = {"Edit", "CREATE"}
-                onDelete={() => alert(`Are you sure you want to delete this one?${p.name}`)}/>
-        
+                onDelete={() => alert(`Are you sure you want to delete this one?${p.name}`)}/>        
     }));
 
     const columns = [
@@ -43,13 +44,22 @@ export function PermissionPage(){
         sortable: false,
     },
     ];
+
+    //Navigation 
+   const redirect = useRedirect();
     return (
         <>
-            <DataTablePage
-                name="permission"
-                columns={columns}
-                data={permissionData}
-            />         
+            <TableWrapperPage 
+                title= "Permission management"
+                headerAction={<CreateButton onClick ={() =>redirect("/upsert", {entityName: "permission"})}/>}
+                >
+                <DataTablePage
+                    name="permission"
+                    columns={columns}
+                    data={permissionData}
+                />
+            
+            </TableWrapperPage>
         </>
     )
 }
