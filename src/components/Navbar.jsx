@@ -6,10 +6,10 @@ const NAV_LINKS = [
   { title: "Home",     path: "/" },
   { title: "About Us", path: "/about" },
   { title: "Services", path: "/services" },
-  { title: "Rooms", path: "/room" },
-  { title: "Types", path: "/type" },
-  { title: "Permissions", path: "/permission" },
-  { title: "Role Permission", path: "/rolepermission" },
+  // { title: "Rooms", path: "/room" },
+  // { title: "Types", path: "/type" },
+  // { title: "Permissions", path: "/permission" },
+  // { title: "Role Permission", path: "/rolepermission" },
 ];
 
 export function NavBarDefault() {
@@ -28,7 +28,7 @@ export function NavBarDefault() {
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <img src={logo} alt="Royal Park logo" className="w-9 h-9 object-contain" />
           <span className="text-teal-700 font-semibold text-[15px] whitespace-nowrap tracking-tight">
-            Royal Park
+            Pennacle
           </span>
         </Link>
 
