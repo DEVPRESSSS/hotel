@@ -9,10 +9,11 @@ import { RoomPage } from './pages/Admin/Room';
 import { PermissionPage } from './pages/Admin/Permissions/Permission';
 import { RegisterPage } from './pages/Auth/Register';
 import { GuestDashboardPage } from './pages/Guest/GuestDashboard';
-import { UpsertFormPage } from './components/Forms/UpsertForm';
 import { PublicLayout } from './Layout/PublicLayout';
 import { AdminLayout } from './Layout/AdminLayout';
 import { DashboardOverviewPage } from './pages/Admin/Dashboard/DashboardOverview';
+import { UserPage } from './pages/Admin/Users/User';
+import { UpsertFormPage } from './pages/Admin/Upsert/Forms/UpsertForm';
 export default function App() {
 
   return (
@@ -32,9 +33,9 @@ export default function App() {
                     <Route path="/dashboard" element ={<DashboardOverviewPage/>} />
                     <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
                     <Route path="/permission" element ={<PermissionPage/>} />
-                    <Route path="/upsert" element ={<UpsertFormPage/>} />
+                    <Route path="/upsert/:entity" element ={<UpsertFormPage/>} />
+                    <Route path="/user" element ={<UserPage/>} />
                 </Route>
-            
               </Routes>
       </BrowserRouter>
  

@@ -1,8 +1,11 @@
 import { apiFetch } from "./apiClient";
-
-//roomApi.js
 export async function fetchRooms() {
    return(
-    apiFetch("rooms")
+      apiFetch("rooms")
+   )
+}
+export async function DeleteRoom(id){
+   return (
+      apiFetch(`rooms/${id}`)
    )
 }

@@ -2,12 +2,16 @@ export function HeaderPage(){
 
     return(
         <div className=" flex flex-row
-                 bg-gray-100 h-10 
+                 bg-white h-10 
                   p-1
-                 rounded-lg">
-
+                  border-b-gray-200
+                  shadow
+                  ">
+            {/*Search Icon and Input */}
             <div className="flex flex-row flex-1 
                         rounded-xl
+                        border-2
+                        border-gray-100
                         gap-2 p-0 bg-white">
                  {/*Search Icon */}
                  <div className="flex-none p-1">

@@ -4,6 +4,7 @@ import { ActionButtonComponent } from "../../components/Buttons/ActionButton.jsx
 import { TableWrapperPage } from "../../components/Table/TableWrapper.jsx";
 import { CreateButton } from "../../components/Buttons/CreateButton.jsx";
 import { useRedirect } from "../../hooks/useCustomNavigate.js";
+import { handleDelete } from "../../api/crudClient.js";
 export function RoomPage(){
     const {rooms} = useRooms();
     
@@ -15,7 +16,6 @@ export function RoomPage(){
         floorName: room.floorName,
         createdAt: room.createdAt ? new Date(room.createdAt).toISOString().split("T")[0] : "",
         updatedAt: room.updatedAt ? new Date(room.updatedAt).toISOString().split("T")[0] : "",
-        action:< ActionButtonComponent/>,
         
     }));
 
@@ -50,20 +50,27 @@ export function RoomPage(){
         selector: row => row.updatedAt,
         sortable: true,
     },
+ 
     {
-        name: "Action",
-        selector: row => row.action,
-        sortable: false,
-    },
+        name: 'Action',
+        cell: row => <ActionButtonComponent onDelete={()=> handleDelete(`${row.id}`)}/>,
+        button: true,
+        width: '100px',
+    }
     ];
-    
-    //Call redirect
+
+    //Call the redirect function
     const redirect = useRedirect();
     return (
         <TableWrapperPage 
             title= "Room management"
-            headerAction={<CreateButton name = "Room" 
-                        onClick={() => redirect("/upsert", {entityName: "room"}) }/>}
+            headerAction={<CreateButton 
+                        name = "Room" 
+                        onClick={() => redirect("/upsert/room", 
+                            {
+                                entityName: "room",
+                            }) 
+                        }/>}
             >
             <DataTablePage
                 columns={columns}
