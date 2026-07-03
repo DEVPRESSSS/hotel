@@ -18,6 +18,7 @@ export function useLogin() {
 
     try {
       const response = await login(email, password);
+      //Decide base on the role
       if(response.roleName === "Admin"){
           navigate("/dashboard");
       }else if(response.roleName === "Customer"){

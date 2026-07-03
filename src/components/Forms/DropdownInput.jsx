@@ -9,8 +9,8 @@ export function DropdownInput({ optionValue = [], name }) {
             <option value="">-- Select {name} --</option>
 
             {optionValue.map((item) => (
-                <option key={item.roomTypeId} value={item.roomTypeId}>
-                    {item.roomTypeName}
+                <option key={item.id} value={item.id}>
+                    {item.name}
                 </option>
             ))}
         </select>
