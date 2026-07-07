@@ -4,10 +4,11 @@ import { ActionButtonComponent } from "../../components/Buttons/ActionButton.jsx
 import { TableWrapperPage } from "../../components/Table/TableWrapper.jsx";
 import { CreateButton } from "../../components/Buttons/CreateButton.jsx";
 import { useRedirect } from "../../hooks/useCustomNavigate.js";
-import { handleDelete } from "../../api/crudClient.js";
 export function RoomPage(){
-    const {rooms} = useRooms();
-    
+    const {rooms, removeRoom} = useRooms();
+     //Call the redirect function
+    const redirect = useRedirect();
+
     const roomData = rooms.map(room => ({
         id: room.roomId,
         roomNo: room.roomNumber,
@@ -53,14 +54,17 @@ export function RoomPage(){
  
     {
         name: 'Action',
-        cell: row => <ActionButtonComponent onDelete={()=> handleDelete(`${row.id}`)}/>,
+        cell: row => <ActionButtonComponent 
+                onEdit={()=> redirect(`/upsert/room/${row.id}`)}
+                onDelete={
+                    ()=> removeRoom(`${row.id}`)
+                }/>,
         button: true,
         width: '100px',
     }
     ];
 
-    //Call the redirect function
-    const redirect = useRedirect();
+   
     return (
         <TableWrapperPage 
             title= "Room management"

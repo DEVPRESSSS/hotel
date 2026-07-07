@@ -5,29 +5,25 @@ import { DropdownInput } from "../../../../components/Forms/DropdownInput";
 import { useRoomType } from "../../../../hooks/useRoomType";
 import { useFloor } from "../../../../hooks/useFloor";
 import { useMemo, useState } from "react";
-import { handleUpsert } from "../../../../api/crudClient";
+import { createRoom } from "../../../../api/roomApi";
 
 export function RoomFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
-
-    // Get the room type from api
+    
+    //Fetch room types from API with the use of useMemo
     const { roomTypes } = useRoomType();
     const roomTypesValue = useMemo(
         () => roomTypes.map(rt => ({ id: rt.roomTypeId, name: rt.roomTypeName })),
         [roomTypes]
     );
-
+    //Fetch floors from API with the use of useFloor
     const {floors} = useFloor();
-    // const floorsValue = floors.map(f => ({
-    //     id : f.floorId,
-    //     name : f.floorName
-    // }));
     const floorsValue = useMemo(
         () => floors.map(rt => ({ id: rt.floorId, name: rt.floorName })),
         [floors]
     );
-    
+
     //Put the inputs in the UseState
     const [formData, setFormData] = useState({
        roomNumber: "",
@@ -50,9 +46,11 @@ export function RoomFormPage() {
         e.preventDefault();
 
         try {
-            const success = await handleUpsert(formData.roomId ?? "", formData);
+            //const success = await createRoom("rooms", formData.roomId ?? "", formData);
+            const success = await createRoom(formData);
             if(success){
                 alert(`Room Inserted successfully`);
+                //Redirect here
             }
         } catch (error) {
             alert(`${error.message}`)
@@ -78,7 +76,8 @@ export function RoomFormPage() {
                         {/* Room number */}
                         <div>
                             <LabelStyle name="RoomNumber" />
-                            <TextInput name="RoomNumber"
+                            <TextInput name="roomNumber"
+                                     value={formData.roomNumber}
                                     onChange= {handleChange}
                                     placeholder="eg. ROOM-01" />
                         </div>
@@ -87,25 +86,30 @@ export function RoomFormPage() {
                         <div>
                             <LabelStyle name="Capacity" />
                             <TextInput name="capacity"
+                                      value={formData.capacity}
                                        onChange= {handleChange}
                                        placeholder="1" />
                         </div>
 
                         {/* Room Type */}
                         <div>
-                            <LabelStyle name="RoomType" />
-                            <DropdownInput name="roomTypeId"
+                            <LabelStyle name="Room Type" />
+                            <DropdownInput 
+                                    nameFor="room type"
+                                     name="roomTypeId"
+                                     value={formData.roomTypeId}
                                      onChange= {handleChange}
-                                     value={formData.roomTypeId} 
                                      optionValue={roomTypesValue} />
                         </div>
 
                         {/* Floor */}
                         <div>
                             <LabelStyle name="Floor" />
-                            <DropdownInput name="floorId" 
+                            <DropdownInput 
+                                    nameFor="floor"
+                                    name="floorId" 
+                                    value={formData.floorId}
                                     onChange= {handleChange}
-                                    value = {formData.floorId}
                                     optionValue={floorsValue}/>
                         </div>
                     </div>

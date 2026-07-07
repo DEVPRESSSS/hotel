@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchRooms } from "../api/roomApi";
+import { deleteRoom, getRooms } from "../api/roomApi";
 
 export function useRooms() {
     const [rooms, setRooms] = useState([]);
@@ -7,11 +7,17 @@ export function useRooms() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchRooms()
+        getRooms()
             .then(setRooms)
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false));
     }, []);
 
-    return { rooms, loading, error };
+    //Call the remove room to auto refresh
+    const removeRoom = async(id) => {
+        await deleteRoom(id);
+        setRooms(prev => prev.filter(room => room.roomId !==id))
+    };
+
+    return { rooms,removeRoom, loading, error };
 }

@@ -3,6 +3,7 @@ import { RoomFormPage } from "./RoomForm";
 
 export function UpsertFormPage(){
     const {entity} = useParams();
+
     const form = {
         room : <RoomFormPage/>,
     }

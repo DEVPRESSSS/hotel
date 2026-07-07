@@ -33,8 +33,11 @@ export default function App() {
                     <Route path="/dashboard" element ={<DashboardOverviewPage/>} />
                     <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
                     <Route path="/permission" element ={<PermissionPage/>} />
-                    <Route path="/upsert/:entity" element ={<UpsertFormPage/>} />
-                    <Route path="/user" element ={<UserPage/>} />
+                    <Route
+                        path="/upsert/:entity/:id?"
+                        element={<UpsertFormPage />}
+                    />                   
+                     <Route path="/user" element ={<UserPage/>} />
                 </Route>
               </Routes>
       </BrowserRouter>
