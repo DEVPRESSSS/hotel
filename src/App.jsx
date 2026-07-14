@@ -14,6 +14,7 @@ import { AdminLayout } from './Layout/AdminLayout';
 import { DashboardOverviewPage } from './pages/Admin/Dashboard/DashboardOverview';
 import { UserPage } from './pages/Admin/Users/User';
 import { UpsertFormPage } from './pages/Admin/Upsert/Forms/UpsertForm';
+import { ToastContainer } from 'react-toastify';
 export default function App() {
 
   return (
@@ -40,6 +41,10 @@ export default function App() {
                      <Route path="/user" element ={<UserPage/>} />
                 </Route>
               </Routes>
+              <ToastContainer
+                position="top-right"
+                autoClose={3000}
+            />
       </BrowserRouter>
  
     </>

@@ -13,8 +13,9 @@ export async function apiFetch(endpoint, options = {}) {
     ...rest,
   });
 
+  const data = await response.json();
   if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
+    throw new Error(`${data.message}`);
   }
-  return response.json();
+  return data;
 }

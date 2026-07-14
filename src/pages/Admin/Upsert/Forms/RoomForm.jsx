@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
 import { DropdownInput } from "../../../../components/Forms/DropdownInput";
@@ -6,10 +6,13 @@ import { useRoomType } from "../../../../hooks/useRoomType";
 import { useFloor } from "../../../../hooks/useFloor";
 import { useMemo, useState } from "react";
 import { createRoom } from "../../../../api/roomApi";
+import { toast } from 'react-toastify';
 
 export function RoomFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
+
+    const navigate = useNavigate();
     
     //Fetch room types from API with the use of useMemo
     const { roomTypes } = useRoomType();
@@ -49,11 +52,12 @@ export function RoomFormPage() {
             //const success = await createRoom("rooms", formData.roomId ?? "", formData);
             const success = await createRoom(formData);
             if(success){
-                alert(`Room Inserted successfully`);
-                //Redirect here
+                toast.success(`${success.message}`);
+                navigate("/room");
             }
         } catch (error) {
-            alert(`${error.message}`)
+            toast.error(`${error.message}`);
+
         }
     };
 
