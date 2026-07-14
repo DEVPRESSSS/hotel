@@ -8,7 +8,7 @@ export function AdminLayout() {
 
       {/* Sidebar */}
       <aside className="w-48 bg-gray-50 border-r border-gray-200 flex flex-col p-2">
-        <p className="text-sm text-center
+        <p className="text-lg text-center
                  font-medium text-gray-900
                  px-3 py-3 mb-1
                  border-b border-gray-200">
@@ -31,6 +31,16 @@ export function AdminLayout() {
                 }
                 children={"Dashboard"}
                 />
+
+            {/*Booking */}
+            <SidebarLink
+              to={"/booking"}
+              icon = { <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z" />
+                      </svg>
+              }
+              children={"Booking"}
+              />
 
             {/*Room*/}
             <SidebarLink

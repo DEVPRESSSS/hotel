@@ -1,11 +1,11 @@
-import { useLocation, useNavigate } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
 import { DropdownInput } from "../../../../components/Forms/DropdownInput";
 import { useRoomType } from "../../../../hooks/useRoomType";
 import { useFloor } from "../../../../hooks/useFloor";
-import { useMemo, useState } from "react";
-import { createRoom } from "../../../../api/roomApi";
+import { useEffect, useMemo, useState } from "react";
+import { createRoom, getRoomById, updateRoom } from "../../../../api/roomApi";
 import { toast } from 'react-toastify';
 
 export function RoomFormPage() {
@@ -44,17 +44,50 @@ export function RoomFormPage() {
         }));
     };
 
+    //Get the Id of the Room
+    const {id} = useParams();
+    useEffect(() => {
+        if (!id) return; 
+
+        const fetchRoom = async () => {
+            try {
+                const roomObj = await getRoomById(id);
+                setFormData({
+                    roomNumber: roomObj.roomNumber,
+                    capacity: roomObj.capacity,
+                    roomTypeId: roomObj.roomTypeId,
+                    floorId: roomObj.floorId
+                });
+            } catch (error) {
+                toast.error(`${error.message}`);
+            }
+        };
+
+        fetchRoom();
+    }, [id]);
+
     //Handle submit 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             //const success = await createRoom("rooms", formData.roomId ?? "", formData);
-            const success = await createRoom(formData);
-            if(success){
-                toast.success(`${success.message}`);
-                navigate("/room");
+            let success;
+            if (id) {
+                success = await updateRoom(id, formData);
+            } else {
+                success = await createRoom(formData);
             }
+            navigate("/room");
+
+            toast.success(`${success.message}`);
+
+            //     navigate("/room");
+            // const success = await createRoom(formData);
+            // if(success){
+            //     toast.success(`${success.message}`);
+            //     navigate("/room");
+            // }
         } catch (error) {
             toast.error(`${error.message}`);
 
@@ -77,6 +110,10 @@ export function RoomFormPage() {
             <form onSubmit={handleSubmit}>
                 <div className="px-6 py-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
+                        <TextInput name="roomNumber"                             
+                                     value={formData.roomId}
+                                      visibility = {true}
+                                     />
                         {/* Room number */}
                         <div>
                             <LabelStyle name="RoomNumber" />

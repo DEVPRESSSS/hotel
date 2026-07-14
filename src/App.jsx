@@ -15,6 +15,7 @@ import { DashboardOverviewPage } from './pages/Admin/Dashboard/DashboardOverview
 import { UserPage } from './pages/Admin/Users/User';
 import { UpsertFormPage } from './pages/Admin/Upsert/Forms/UpsertForm';
 import { ToastContainer } from 'react-toastify';
+import { BookingPage } from './pages/Admin/Booking/Booking';
 export default function App() {
 
   return (
@@ -34,6 +35,7 @@ export default function App() {
                     <Route path="/dashboard" element ={<DashboardOverviewPage/>} />
                     <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
                     <Route path="/permission" element ={<PermissionPage/>} />
+                    <Route path="/booking" element ={<BookingPage/>} />
                     <Route
                         path="/upsert/:entity/:id?"
                         element={<UpsertFormPage />}
