@@ -1,6 +1,6 @@
 export function TableWrapperPage({title, headerAction, children}){
     return(
-        <div className="bg-white rounded-lg p-4 shadow-sm border-t-4 border-teal-600">
+        <div className="bg-white p-4 border-t-2 border-gray-100 shadow-sm">
             {/* Header */}
             <div className="flex items-center justify-between mb-2 p-2
                     border-b-2 border-gray-100">

@@ -30,12 +30,6 @@ export function UserPage(){
     }));
 
     const columns = [
-    // {
-    //     name: "Id",
-    //     selector: row => row.id,
-    //     sortable: true,
-        
-    // },
     {
         name: "Name",
         selector: row => row.fullName,

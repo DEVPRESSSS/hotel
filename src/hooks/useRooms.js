@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { deleteRoom, getRooms } from "../api/roomApi";
 import { toast } from "react-toastify";
+import { confirmationHandler } from "../utils/sweetAlert";
 
 export function useRooms() {
     const [rooms, setRooms] = useState([]);
@@ -16,9 +17,14 @@ export function useRooms() {
 
     //Call the remove room to auto refresh
     const removeRoom = async(id) => {
-        await deleteRoom(id);
 
-        toast.success("Room deleted successfully!!");
+        //Delete confirmation
+        const confirm = await confirmationHandler();
+        if(!confirm) return;
+
+        const data = await deleteRoom(id);
+        toast.success(data.message);
+
         setRooms(prev => prev.filter(room => room.roomId !==id))
     };
 

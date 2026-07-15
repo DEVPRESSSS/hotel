@@ -4,8 +4,8 @@ export function HeaderPage(){
         <div className=" flex flex-row
                  bg-white h-10 
                   p-1
-                  border-b-gray-200
-                  shadow
+                  border-b-2
+                  border-gray-100
                   ">
             {/*Search Icon and Input */}
             <div className="flex flex-row flex-1 

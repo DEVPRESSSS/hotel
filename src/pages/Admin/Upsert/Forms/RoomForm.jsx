@@ -7,6 +7,7 @@ import { useFloor } from "../../../../hooks/useFloor";
 import { useEffect, useMemo, useState } from "react";
 import { createRoom, getRoomById, updateRoom } from "../../../../api/roomApi";
 import { toast } from 'react-toastify';
+import { useGoBack } from "../../../../hooks/usePrevPage";
 
 export function RoomFormPage() {
     const location = useLocation();
@@ -71,7 +72,6 @@ export function RoomFormPage() {
         e.preventDefault();
 
         try {
-            //const success = await createRoom("rooms", formData.roomId ?? "", formData);
             let success;
             if (id) {
                 success = await updateRoom(id, formData);
@@ -79,20 +79,15 @@ export function RoomFormPage() {
                 success = await createRoom(formData);
             }
             navigate("/room");
-
             toast.success(`${success.message}`);
 
-            //     navigate("/room");
-            // const success = await createRoom(formData);
-            // if(success){
-            //     toast.success(`${success.message}`);
-            //     navigate("/room");
-            // }
         } catch (error) {
             toast.error(`${error.message}`);
 
         }
     };
+    //Handle cancel button
+    const cancel = useGoBack();
 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
@@ -110,10 +105,7 @@ export function RoomFormPage() {
             <form onSubmit={handleSubmit}>
                 <div className="px-6 py-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
-                        <TextInput name="roomNumber"                             
-                                     value={formData.roomId}
-                                      visibility = {true}
-                                     />
+               
                         {/* Room number */}
                         <div>
                             <LabelStyle name="RoomNumber" />
@@ -160,8 +152,9 @@ export function RoomFormPage() {
                 <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 flex justify-end gap-3">
                     <button
                         type="button"
+                        onClick={cancel}
                         className="px-4 py-2 rounded-lg text-sm font-medium text-gray-600 border-2 border-gray-300
-                                hover:bg-gray-100 transition-colors duration-150"
+                                hover:bg-gray-100 transition-colors duration-150 cursor-pointer"
                     >
                         Cancel
                     </button>
