@@ -6,15 +6,14 @@ import {CreateButton} from "../../../components/Buttons/CreateButton"
 import { useRedirect } from "../../../hooks/useCustomNavigate";
 
 export function PermissionPage(){
-    const {permissions} = usePermission();
+    const {permissions, removePermission} = usePermission();
     
     const permissionData = permissions.map(p => ({
         permissionId: p.permissionId,
         name: p.name,
         createdAt: p.createdAt ? new Date(p.createdAt).toISOString().split("T")[0] : "",
         updatedAt: p.updatedAt ? new Date(p.updatedAt).toISOString().split("T")[0] : "",
-        action:<ActionButtonComponent 
-                onDelete={() => alert(`Are you sure you want to delete this one?${p.name}`)}/>        
+   
     }));
 
     const columns = [
@@ -38,10 +37,16 @@ export function PermissionPage(){
         selector: row => row.updatedAt,
         sortable: true,
     },
+  
     {
-        name: "Action",
-        selector: row => row.action,
-        sortable: false,
+        name: 'Action',
+        cell: row => <ActionButtonComponent 
+                onEdit={()=> redirect(`/upsert/permission/${row.permissionId}`)}
+                onDelete={
+                    ()=> removePermission(`${row.permissionId}`)
+                }/>,
+        button: true,
+        width: '100px',
     },
     ];
 
@@ -51,7 +56,14 @@ export function PermissionPage(){
         <>
             <TableWrapperPage 
                 title= "Permission management"
-                headerAction={<CreateButton onClick ={() =>redirect("/upsert", {entityName: "permission"})}/>}
+                headerAction={<CreateButton 
+                            onClick ={
+                            () =>redirect("/upsert/permission",
+                                 {
+                                    entityName: "permission"
+                                 })}
+                         
+                           />}
                 >
                 <DataTablePage
                     name="permission"

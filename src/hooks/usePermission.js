@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { fetchPermissions } from "../api/permissionApi";
+import { deletePermission, getPermissions } from "../api/permissionApi";
+import { confirmationHandler } from "../utils/sweetAlert";
+import { toast } from "react-toastify";
 
 export function usePermission() {
     const [permissions, setPermission] = useState([]);
@@ -7,11 +9,23 @@ export function usePermission() {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchPermissions()
+        getPermissions()
             .then(setPermission)
             .catch((err) => setError(err.message))
             .finally(() => setLoading(false));
     }, []);
 
-    return { permissions, loading, error };
+    const removePermission = async(id) =>{
+
+        const confirm = await confirmationHandler();
+        if(!confirm) return;
+
+        const data = await deletePermission(id);
+
+        toast.success(data.message);
+        setPermission(prev => prev.filter(p => p.permissionId !==id))
+
+    };
+
+    return { permissions, removePermission, loading, error };
 }

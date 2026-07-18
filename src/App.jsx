@@ -16,8 +16,9 @@ import { UserPage } from './pages/Admin/Users/User';
 import { UpsertFormPage } from './pages/Admin/Upsert/Forms/UpsertForm';
 import { ToastContainer } from 'react-toastify';
 import { BookingPage } from './pages/Admin/Booking/Booking';
-export default function App() {
+import { RoomTypePage } from './pages/Admin/Room/RoomType';
 
+export default function App() {
   return (
     <>
       <BrowserRouter>
@@ -30,17 +31,22 @@ export default function App() {
                     <Route path="/register" element ={<RegisterPage/>} />
                 </Route>
                 <Route element = {<AdminLayout/>}>
+                    {/*Pages*/}
                     <Route path="/room" element ={<RoomPage/>} />
                     <Route path="/addroom" element ={<AboutPage/>} />
                     <Route path="/dashboard" element ={<DashboardOverviewPage/>} />
                     <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
                     <Route path="/permission" element ={<PermissionPage/>} />
-                    <Route path="/booking" element ={<BookingPage/>} />
+                    <Route path="/booking" element ={<BookingPage/>} />            
+                    <Route path="/user" element ={<UserPage/>} />
+                    <Route path="/roomtype" element ={<RoomTypePage/>} />
+
+                    {/*Upsert Form Page*/}
                     <Route
                         path="/upsert/:entity/:id?"
                         element={<UpsertFormPage />}
                     />                   
-                     <Route path="/user" element ={<UserPage/>} />
+                     
                 </Route>
               </Routes>
               <ToastContainer
