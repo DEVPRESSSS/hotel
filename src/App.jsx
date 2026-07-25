@@ -19,6 +19,8 @@ import { BookingPage } from './pages/Admin/Booking/Booking';
 import { RoomTypePage } from './pages/Admin/Room/RoomType';
 import { RolePage } from './pages/Admin/Roles/Role';
 import { RolePermissionPage } from './pages/Admin/Permissions/RolePermission';
+import { ServicePage } from './pages/Services';
+import { ProductPage } from './pages/Product';
 
 export default function App() {
   return (
@@ -29,6 +31,8 @@ export default function App() {
                     <Route path="/" element = {<HomePage/>} />
                     <Route path="/about" element={<AboutPage/>}/>
                     <Route path="/book" element={<BookPage/>}/>
+                    <Route path="/services" element={<ServicePage/>}/>
+                    <Route path="/product" element ={<ProductPage/>} />
                     <Route path="/login" element ={<LoginPage/>} />
                     <Route path="/register" element ={<RegisterPage/>} />
                 </Route>

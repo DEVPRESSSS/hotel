@@ -4,7 +4,7 @@ import { NavBarDefault } from "../components/Navbar"
 
 export function PublicLayout(){
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-white">
             <NavBarDefault/>
                 {/*Render main layout*/}
                 <main className="flex-1 
