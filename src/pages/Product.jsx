@@ -1,16 +1,10 @@
 //import { useRooms } from "../hooks/useRooms";
 import HotelImage1 from "../assets/HotelIntro.png";
+import { useProducts } from "../hooks/useDefaultProduct";
 
-const PLACEHOLDER_ROOMS = [
-  { id: 1, name: "Deluxe", price: 400, image: HotelImage1 },
-  { id: 2, name: "Executive Suite", price: 650, image: HotelImage1 },
-  { id: 3, name: "Standard", price: 250, image: HotelImage1 },
-];
 
 export function ProductPage() {
-  // const { rooms } = useRooms();
-  const rooms = PLACEHOLDER_ROOMS;
-
+  const { products } = useProducts();
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
@@ -27,22 +21,22 @@ export function ProductPage() {
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rooms.map(({ id, name, price, image }) => (
+          {products.map(({ roomId, roomName, pricePerNigth}) => (
             <div
-              key={id}
+              key={roomId}
               className="rounded-2xl border-t-4 border-teal-700 shadow-sm overflow-hidden
                          hover:shadow-md transition-shadow duration-200"
             >
               <img
-                src={image}
-                alt={`${name} room`}
+                src={HotelImage1}
+                alt={`hotel room`}
                 className="w-full h-56 object-cover"
               />
 
               <div className="px-5 pt-4 pb-3">
-                <h3 className="font-semibold text-lg text-gray-900">{name}</h3>
+                <h3 className="font-semibold text-lg text-gray-900">{roomName}</h3>
                 <p className="mt-1 text-teal-800 text-2xl font-bold">
-                  ${price}
+                  ${pricePerNigth}
                   <span className="text-sm font-medium text-gray-400"> /night</span>
                 </p>
               </div>
