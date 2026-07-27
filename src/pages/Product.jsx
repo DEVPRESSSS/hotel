@@ -1,10 +1,18 @@
 //import { useRooms } from "../hooks/useRooms";
+import { useNavigate } from "react-router-dom";
 import HotelImage1 from "../assets/HotelIntro.png";
 import { useProducts } from "../hooks/useDefaultProduct";
 
 
 export function ProductPage() {
   const { products } = useProducts();
+  const navigate = useNavigate();
+
+  const viewSelectedRoom = async (id) => {
+    if(!id)
+      return;
+    navigate(`/viewselectedproduct/${id}`);
+  };
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">
@@ -21,9 +29,9 @@ export function ProductPage() {
 
         {/* Cards grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map(({ roomId, roomName, pricePerNigth}) => (
+          {products.map(({ roomTypeId, roomTypeName, pricePerNight}) => (
             <div
-              key={roomId}
+              key={roomTypeId}
               className="rounded-2xl border-t-4 border-teal-700 shadow-sm overflow-hidden
                          hover:shadow-md transition-shadow duration-200"
             >
@@ -34,9 +42,9 @@ export function ProductPage() {
               />
 
               <div className="px-5 pt-4 pb-3">
-                <h3 className="font-semibold text-lg text-gray-900">{roomName}</h3>
+                <h3 className="font-semibold text-lg text-gray-900">{roomTypeName}</h3>
                 <p className="mt-1 text-teal-800 text-2xl font-bold">
-                  ${pricePerNigth}
+                  ${pricePerNight}
                   <span className="text-sm font-medium text-gray-400"> /night</span>
                 </p>
               </div>
@@ -46,7 +54,8 @@ export function ProductPage() {
                    border border-teal-800 text-teal-800
                    hover:bg-teal-800 hover:text-white
                    transition-colors duration-200 cursor-pointer
-                   group flex items-center justify-center gap-2">
+                   group flex items-center justify-center gap-2"
+                   onClick={()=>viewSelectedRoom(roomTypeId)}>
                 <span>View</span>
                 <svg
                     xmlns="http://www.w3.org/2000/svg"

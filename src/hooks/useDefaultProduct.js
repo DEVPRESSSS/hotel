@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProducts } from "../api/defaultProductApi";
+import { getProducts, getRoomByRoomTypeId } from "../api/defaultProductApi";
 
 export function useProducts() {
     const [products, setProducts] = useState([]);
@@ -15,4 +15,24 @@ export function useProducts() {
 
   
     return { products, loading, error };
+}
+
+export function useViewSelectedRooms(id){
+
+    const [selectedRooms, setSelectedRooms] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        if(!id){
+            return;
+        }
+
+        getRoomByRoomTypeId(id)
+            .then(setSelectedRooms)
+            .catch((err) => setError(err.message))
+            .finally(() => setLoading(false));
+    }, [id]);
+
+    return { selectedRooms, loading, error };
 }

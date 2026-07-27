@@ -21,6 +21,7 @@ import { RolePage } from './pages/Admin/Roles/Role';
 import { RolePermissionPage } from './pages/Admin/Permissions/RolePermission';
 import { ServicePage } from './pages/Services';
 import { ProductPage } from './pages/Product';
+import { ViewSelectedPage } from './pages/ViewSelected';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
                     <Route path="/product" element ={<ProductPage/>} />
                     <Route path="/login" element ={<LoginPage/>} />
                     <Route path="/register" element ={<RegisterPage/>} />
+                    <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
                 </Route>
                 <Route element = {<AdminLayout/>}>
                     {/*Pages*/}
