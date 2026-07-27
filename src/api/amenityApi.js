@@ -24,7 +24,7 @@ export function updateAmenity(id, data) {
 }
 
 export function deleteAmenity(id) {
-    return apiFetch(`roles/${id}`, {
+    return apiFetch(`amenity/${id}`, {
         method: "DELETE",
     });
 }

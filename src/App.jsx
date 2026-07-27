@@ -22,6 +22,8 @@ import { RolePermissionPage } from './pages/Admin/Permissions/RolePermission';
 import { ServicePage } from './pages/Services';
 import { ProductPage } from './pages/Product';
 import { ViewSelectedPage } from './pages/ViewSelected';
+import { RoomAmenityPage } from './pages/Admin/Room/RoomAmenity';
+import { AmenityPage } from './pages/Admin/Room/Amenity';
 
 export default function App() {
   return (
@@ -49,6 +51,8 @@ export default function App() {
                     <Route path="/user" element ={<UserPage/>} />
                     <Route path="/roomtype" element ={<RoomTypePage/>} />
                     <Route path="/role" element ={<RolePage/>} />
+                    <Route path="/roomamenity" element ={<RoomAmenityPage/>} />
+                    <Route path="/amenity" element ={<AmenityPage/>} />
                     <Route path="/rolepermission" element ={<RolePermissionPage/>} />
 
                     {/*Upsert Form Page*/}
