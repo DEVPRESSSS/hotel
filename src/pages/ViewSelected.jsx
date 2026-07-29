@@ -1,6 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useViewSelectedRooms } from "../hooks/useDefaultProduct";
 import HotelImage1 from "../assets/HotelIntro.png";
+import { getChosenRoomById } from "../api/defaultProductApi";
+import { toast } from "react-toastify";
 
 function CapacityIcon() {
   return (
@@ -12,23 +14,31 @@ function CapacityIcon() {
   );
 }
 
-// function FloorIcon() {
-//   return (
-//     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-//          strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-//       <path strokeLinecap="round" strokeLinejoin="round"
-//         d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m7.5-6h.75m-.75 3h.75m-.75 3h.75M6 21v-3.375c0-.621.504-1.125 1.125-1.125h1.5c.621 0 1.125.504 1.125 1.125V21m4.5 0v-3.375c0-.621.504-1.125 1.125-1.125h1.5c.621 0 1.125.504 1.125 1.125V21" />
-//     </svg>
-//   );
-// }
+
 
 export function ViewSelectedPage() {
+
   const { id } = useParams();
-  const { selectedRooms, loading, error } = useViewSelectedRooms(id);
+  const { selectedRooms} = useViewSelectedRooms(id);
+
+  const navigate = useNavigate();
 
   if (!id) return null;
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Something went wrong: {error}</p>;
+
+
+  const clickBooking = async(id) =>{
+
+      if(!id)
+        return null;
+
+      const data = await getChosenRoomById(id);
+      if(!data){
+         toast.error(data.message)
+      }
+            //Navigate to the page
+      navigate(`/selectedroom/${id}`)
+
+  };
 
   return (
     <section className="bg-white">
@@ -37,7 +47,7 @@ export function ViewSelectedPage() {
           {selectedRooms.map((room) => (
             <div
               key={room.roomId}
-              className="group rounded-2xl border-t-4 border-teal-700 shadow-sm overflow-hidden
+              className="group rounded-2xl  shadow-sm overflow-hidden
                          hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200"
             >
               {/* Image with floor badge */}
@@ -48,7 +58,7 @@ export function ViewSelectedPage() {
                   className="w-full h-52 object-cover"
                 />
                 <span className="absolute top-3 left-3 flex items-center gap-1.5 bg-white/90 backdrop-blur-sm
-                                  text-teal-800 text-xs font-semibold px-2.5 py-1 rounded-full">
+                                  text-gray-400 text-xs font-semibold px-2.5 py-1 rounded-full">
                  
                   {room.floorName}
                 </span>
@@ -88,7 +98,7 @@ export function ViewSelectedPage() {
                                 bg-gray-100 "
                       title={amenity}
                     >
-                      <p className="text-xs font-medium text-teal-800 truncate">
+                      <p className="text-xs font-medium text-gray-500 truncate">
                         {amenity}
                       </p>
                     </div>
@@ -98,13 +108,14 @@ export function ViewSelectedPage() {
               {/* CTA */}
               <div className="px-5 pb-5">
                 <button
+                  onClick={()=> clickBooking(room.roomId)}
                   className="w-full py-2.5 rounded-xl font-medium
                              border border-teal-800 text-teal-800
                              hover:bg-teal-800 hover:text-white
                              transition-colors duration-200 cursor-pointer
                              flex items-center justify-center gap-2"
                 >
-                  <span>Book</span>
+                  <span>Select</span>
                  <svg xmlns="http://www.w3.org/2000/svg" 
                         fill="none" viewBox="0 0 24 24" 
                         stroke-width="1.5" 

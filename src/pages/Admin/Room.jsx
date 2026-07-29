@@ -19,8 +19,6 @@ export function RoomPage() {
     updatedAt: room.updatedAt ? new Date(room.updatedAt).toISOString().split("T")[0] : "",
   }));
 
- 
-
   const columns = [
     { name: "Room No.", selector: row => row.roomNo, sortable: true },
     { name: "Capacity", selector: row => row.capacity, sortable: true },

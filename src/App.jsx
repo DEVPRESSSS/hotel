@@ -24,6 +24,7 @@ import { ProductPage } from './pages/Product';
 import { ViewSelectedPage } from './pages/ViewSelected';
 import { RoomAmenityPage } from './pages/Admin/Room/RoomAmenity';
 import { AmenityPage } from './pages/Admin/Room/Amenity';
+import { SelectedRoomPage } from './pages/SelectedRoom';
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
                     <Route path="/login" element ={<LoginPage/>} />
                     <Route path="/register" element ={<RegisterPage/>} />
                     <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
+                    <Route path= "/selectedroom/:id?" element = {<SelectedRoomPage/>}/>
                 </Route>
                 <Route element = {<AdminLayout/>}>
                     {/*Pages*/}

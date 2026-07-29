@@ -7,4 +7,7 @@ export function getProducts() {
 export function getRoomByRoomTypeId(id) {
     return apiFetch(`products/${id}`);
 }
+export function getChosenRoomById(id){
+     return apiFetch(`products/selected-room/${id}`)
+}
 
