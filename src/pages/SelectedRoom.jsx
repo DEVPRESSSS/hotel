@@ -5,14 +5,20 @@ import { useViewSelectedRoom } from "../hooks/useDefaultProduct";
 import { LabelStyle } from "../components/Forms/LabelStyle";
 import DatePicker from "../components/DateTimePicker/DateTimePickerInput";
 import { useBookingDates } from "../hooks/useBookingDate";
+import { useConfirmBooking } from "../hooks/useConfirmBooking";
 
 export function SelectedRoomPage() {
 
     //Get the id of the room
     const { id } = useParams();
+    
+    const { formData, handleChange, setField, handleBooking } = useConfirmBooking(id);
+    const { tomorrow, handleCheckIn, handleCheckOut } = useBookingDates(
+    formData.checkIn,
+    formData.checkOut,
+    setField
+    );
 
-    const{checkIn, tommorow, checkOut, handleCheckIn, handleCheckOut} = useBookingDates();
- 
     //Pass the Id in the hook
     const { selectedRoom: room } = useViewSelectedRoom(id);
     if (!room) return null;
@@ -95,32 +101,31 @@ export function SelectedRoomPage() {
                             </div>
                         </dl>
 
-                        <form className="mt-6 flex flex-col gap-4">
+                        <form onSubmit={handleBooking} className="mt-6 flex flex-col gap-4">
                             <div className="grid grid-cols-2 gap-4">
                                 <DatePicker
+                                    name ="checkIn"
                                     label="Check-in"
                                     disabled={{ before: new Date() }}
-                                    value={checkIn}
+                                    value={formData.checkIn}
                                     onChange={handleCheckIn}
                                 />
                                 <DatePicker
+                                    name ="checkOut"
                                     label="Check-out"
-                                    disabled={{ before: tommorow }}
-                                    value={checkOut}
+                                    disabled={{ before: tomorrow }}
+                                    value={formData.checkOut}
                                     onChange={handleCheckOut}
                                 />
-                            </div>
-
-                            <div>
-                                <LabelStyle name="2nd guest fullname" />
-                                <TextInput />
                             </div>
 
                             <LabelStyle name="Special request" />
                             <TextInput
                                 label="Message"
-                                name="message"
+                                name="specialRequest"      
                                 placeholder="Any special requests?"
+                                value={formData.specialRequest}
+                                onChange={handleChange} 
                             />
 
                             <button

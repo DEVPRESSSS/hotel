@@ -1,37 +1,25 @@
-import { useState } from "react";
+// useBookingDates.js — now just validation logic, no state of its own
 import { toast } from "react-toastify";
 
-export function useBookingDates(){
-
-    const [checkIn, setCheckIn] = useState();
-    const [checkOut, setCheckOut] = useState();
-
-    const handleCheckIn = (date) => {
-        if (checkOut && date >= checkOut) {
-            toast.error("Check-in must be before Check-out.");
-            return;
-        }
-
-        setCheckIn(date);
-    };
-
-    const handleCheckOut = (date) => {
-        if (checkIn && date <= checkIn) {
-            toast.error("Check-out must be after Check-in.");
-            return;
-        }
-
-        setCheckOut(date);
-    };
-
-    const tommorow = new Date();
-    tommorow.setDate(tommorow.getDate() + 1);
-
-    return {
-        checkIn,
-        checkOut,
-        tommorow,
-        handleCheckIn,
-        handleCheckOut
+export function useBookingDates(checkIn, checkOut, setField) {
+  const handleCheckIn = (date) => {
+    if (checkOut && date >= checkOut) {
+      toast.error("Check-in must be before Check-out.");
+      return;
     }
+    setField("checkIn", date);
+  };
+
+  const handleCheckOut = (date) => {
+    if (checkIn && date <= checkIn) {
+      toast.error("Check-out must be after Check-in.");
+      return;
+    }
+    setField("checkOut", date);
+  };
+
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  return { tomorrow, handleCheckIn, handleCheckOut };
 }
