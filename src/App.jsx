@@ -25,12 +25,19 @@ import { ViewSelectedPage } from './pages/ViewSelected';
 import { RoomAmenityPage } from './pages/Admin/Room/RoomAmenity';
 import { AmenityPage } from './pages/Admin/Room/Amenity';
 import { SelectedRoomPage } from './pages/SelectedRoom';
+import { GuestLayout } from './Layout/GuestLayout';
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
               <Routes>
+                <Route element = { <GuestLayout/>}>
+                    <Route path="/product" element ={<ProductPage/>} />
+                    <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
+                    <Route path= "/selectedroom/:id?" element = {<SelectedRoomPage/>}/>
+                 
+                </Route>
                 <Route element = { <PublicLayout/>}>
                     <Route path="/" element = {<HomePage/>} />
                     <Route path="/about" element={<AboutPage/>}/>
@@ -61,8 +68,7 @@ export default function App() {
                     <Route
                         path="/upsert/:entity/:id?"
                         element={<UpsertFormPage />}
-                    />                   
-                     
+                    />                        
                 </Route>
               </Routes>
               <ToastContainer

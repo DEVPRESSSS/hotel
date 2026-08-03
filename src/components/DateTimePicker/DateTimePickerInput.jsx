@@ -65,6 +65,7 @@ export default function DatePicker({ label, value, onChange, disabled }) {
                             onChange(date);
                             setOpen(false);
                         }}
+                        required
                     />
                 </div>
             )}

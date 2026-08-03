@@ -126,6 +126,7 @@ export function SelectedRoomPage() {
                                 placeholder="Any special requests?"
                                 value={formData.specialRequest}
                                 onChange={handleChange} 
+                                
                             />
 
                             <button

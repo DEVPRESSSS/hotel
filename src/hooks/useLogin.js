@@ -1,7 +1,9 @@
 // hooks/useLogin.js
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login } from "../services/authService";
+import { login } from "../api/authApi";
+import { toast } from "react-toastify";
+//import { login } from "../services/authService";
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
@@ -17,15 +19,19 @@ export function useLogin() {
     const password = e.target.password.value;
 
     try {
-      const response = await login(email, password);
+      const response = await login({    
+        email,
+        password
+      });
+
       //Decide base on the role
       if(response.roleName === "Admin"){
           navigate("/dashboard");
       }else if(response.roleName === "Customer"){
-          navigate("/guestdashboard");
+          navigate("/product");
       }
     } catch (err) {
-      alert(`${err.message}`);
+        toast.error(`${err.message}`);
     } finally {
       setLoading(false);
     }
