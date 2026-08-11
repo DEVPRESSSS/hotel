@@ -1,5 +1,6 @@
-//roomApi.js
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
+
 export async function fetchUser() {
-   return apiFetch('users')
+   const {data} = await api.get('users');
+   return data;
 }
