@@ -20,9 +20,9 @@ export function usePermission() {
         const confirm = await confirmationHandler();
         if(!confirm) return;
 
-        const data = await deletePermission(id);
+        const response = await deletePermission(id);
 
-        toast.success(data.message);
+        toast.success(response.data.message);
         setPermission(prev => prev.filter(p => p.permissionId !==id))
 
     };

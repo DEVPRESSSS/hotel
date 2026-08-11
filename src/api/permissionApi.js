@@ -1,29 +1,23 @@
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
 
-export function getPermissions() {
-    return apiFetch("permissions");
+export async function getPermissions() {
+    const { data } = await api.get("/permissions");
+    return data;
+}
+export async function getPermissionById(id) {
+    const {data} = await api.get(`permissions/${id}`);
+    return  data;
+}
+export async function createPermission(data) {
+    const response =  api.post("/permissions", data);
+    return response;
 }
 
-export function getPermissionById(id) {
-    return apiFetch(`permissions/${id}`);
-}
-
-export function createPermission(data) {
-    return apiFetch("permissions", {
-        method: "POST",
-        body: data,
-    });
-}
-
-export function updatePermission(id, data) {
-    return apiFetch(`permissions/${id}`, {
-        method: "PUT",
-        body: data,
-    });
+export async function updatePermission(id, data) {
+    const response =  api.put(`permissions/${id}`,data);
+    return response;
 }
 
 export function deletePermission(id) {
-    return apiFetch(`permissions/${id}`, {
-        method: "DELETE",
-    });
+    return api.delete(`permissions/${id}`);
 }
