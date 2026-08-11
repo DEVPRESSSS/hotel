@@ -3,6 +3,7 @@ import { HeaderPage } from "../components/Dashboard/Header";
 import { SidebarLink } from "../components/NavbarSidebar/SidebarLinks";
 
 export function AdminLayout() {
+
   return (
     <div className="flex h-screen">
 

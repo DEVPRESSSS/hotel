@@ -50,7 +50,7 @@ export function RoomAmenityPage(){
             row.roleName === "Admin" ? null : (
                 <ActionButtonComponent
                     onEdit={() => redirect(`/upsert/roomamenity/${row.roomAmenityId}`)}
-                    onDelete={() => removeRoomAmenity(row.rpId)}
+                    onDelete={() => removeRoomAmenity(row.roomAmenityId)}
                 />
             ),
         button: true,

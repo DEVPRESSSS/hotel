@@ -31,7 +31,7 @@ export function RoomPage() {
       cell: row => (
         <ActionButtonComponent
           onEdit={() => redirect(`/upsert/room/${row.id}`)}
-          onDelete={() => removeRoom(row)}
+          onDelete={() => removeRoom(row.id)}
         />
       ),
       button: true,

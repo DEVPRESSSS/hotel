@@ -22,7 +22,7 @@ export function useAmenity(){
         if(!confirm) return;
 
         const response = await deleteAmenity(id);
-        toast.success(response.message);
+        toast.success(response.data.message);
         
         setAmenities(prev => prev.filter(rp => rp.amenityId !== id));
     };

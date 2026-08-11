@@ -22,7 +22,7 @@ export function useRoomAmenity(){
         if(!confirm) return;
 
         const response = await deleteRoomAmenity(id);
-        toast.success(response.message);
+        toast.success(response.data.message);
         
         setRoomAmenities(prev => prev.filter(rp => rp.rpId !== id));
     };

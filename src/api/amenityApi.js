@@ -1,30 +1,22 @@
-
-import { apiFetch } from "./apiClient";
-
-export function getAmenities() {
-    return apiFetch("amenity");
+import api from "./apiClient";
+export async function getAmenities() {
+    const { data } = await api.get("/amenity");
+    return data;
+}
+export async function getAmenityById(id) {
+    const {data} = await api.get(`amenity/${id}`);
+    return  data;
+}
+export async function createAmenity(data) {
+    const response =  api.post("/amenity", data);
+    return response;
 }
 
-export function getAmenityById(id) {
-    return apiFetch(`amenity/${id}`);
-}
-
-export function createAmenity(data) {
-    return apiFetch("amenity", {
-        method: "POST",
-        body: data,
-    });
-}
-
-export function updateAmenity(id, data) {
-    return apiFetch(`amenity/${id}`, {
-        method: "PUT",
-        body: data,
-    });
+export async function updateAmenity(id, data) {
+    const response =  api.put(`amenity/${id}`,data);
+    return response;
 }
 
 export function deleteAmenity(id) {
-    return apiFetch(`amenity/${id}`, {
-        method: "DELETE",
-    });
+    return api.delete(`amenity/${id}`);
 }

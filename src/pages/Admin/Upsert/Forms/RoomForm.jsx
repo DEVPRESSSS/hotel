@@ -73,17 +73,18 @@ export function RoomFormPage() {
 
         try {
             let success;
+
             if (id) {
                 success = await updateRoom(id, formData);
             } else {
                 success = await createRoom(formData);
             }
+
             navigate("/room");
-            toast.success(`${success.message}`);
+            toast.success(success.data.message);
 
         } catch (error) {
-            toast.error(`${error.message}`);
-
+            toast.error(error.message);
         }
     };
     //Handle cancel button
@@ -94,7 +95,7 @@ export function RoomFormPage() {
             {/* Header */}
             <div className="px-6 py-4 border-b border-gray-100 bg-gray-50">
                 <h5 className="text-lg font-semibold text-gray-800">
-                    Create new {entityName}
+                     {entityName}
                 </h5>
                 <p className="text-sm text-gray-500 mt-0.5">
                     Fill in the details below to add a new {entityName.toLowerCase() || "item"}.

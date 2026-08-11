@@ -59,11 +59,10 @@ export function RoomTypeFormPage() {
                 success = await createRoomType(formData);
             }
             navigate("/roomtype");
-            toast.success(`${success.message}`);
+            toast.success(`${success.data.message}`);
 
         } catch (error) {
             toast.error(`${error.message}`);
-
         }
     };
     //Handle cancel button

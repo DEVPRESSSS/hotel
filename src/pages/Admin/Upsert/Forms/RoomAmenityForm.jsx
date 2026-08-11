@@ -76,7 +76,7 @@ export function RoomAmenityFormPage() {
                 success = await createRoomAmenity(formData);
             }
             previousPage();
-            toast.success(`${success.message}`);
+            toast.success(`${success.data.message}`);
 
         } catch (error) {
             toast.error(`${error.message}`);

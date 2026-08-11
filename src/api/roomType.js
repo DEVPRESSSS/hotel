@@ -1,29 +1,27 @@
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
 
-export function getRoomTypes() {
-    return apiFetch("room-types");
+export async function getRoomTypes() {
+    const {data} = await api.get("room-types");
+    console.log(data);
+    return data;
 }
 
-export function getRoomTypeId(id) {
-    return apiFetch(`room-types/${id}`);
+export async function getRoomTypeId(id) {
+    const{data} = await api.get(`room-types/${id}`);
+    return data;
 }
 
 export function createRoomType(data) {
-    return apiFetch("room-types", {
-        method: "POST",
-        body: data,
-    });
+    const response =  api.post("/room-types", data);
+    return response;
 }
 
-export function updateRoomType(id, data) {
-    return apiFetch(`room-types/${id}`, {
-        method: "PUT",
-        body: data,
-    });
+export async function updateRoomType(id, data) {
+    return await api.put(`room-types/${id}`,data);
+    
 }
 
-export function deleteRoomType(id) {
-    return apiFetch(`room-types/${id}`, {
-        method: "DELETE",
-    });
+export async function deleteRoomType(id) {
+    return api.delete(`room-types/${id}`);
+       
 }

@@ -57,7 +57,7 @@ export function AmenityFormPage() {
                 success = await createAmenity(formData);
             }
             navigate("/amenity");
-            toast.success(`${success.message}`);
+            toast.success(`${success.data.message}`);
 
         } catch (error) {
             toast.error(`${error.message}`);

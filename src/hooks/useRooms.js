@@ -22,8 +22,8 @@ export function useRooms() {
         const confirm = await confirmationHandler();
         if(!confirm) return;
 
-        const data = await deleteRoom(id);
-        toast.success(data.message);
+        const response = await deleteRoom(id);
+        toast.success(response.data.message);
 
         setRooms(prev => prev.filter(room => room.roomId !==id))
     };

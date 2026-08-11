@@ -1,4 +1,8 @@
+import { useLogOut } from "../../hooks/useLogin";
+
 export function HeaderPage() {
+
+  const {handleLogout} = useLogOut();
   return (
     <div className="flex items-center gap-4 bg-white h-16 px-4 border-b border-gray-200">
 
@@ -57,9 +61,12 @@ export function HeaderPage() {
         <div className="w-px h-6 bg-gray-200 mx-1" />
 
         {/* Profile avatar */}
-        <button className="flex items-center justify-center w-9 h-9 rounded-full
+        <button
+           className="flex items-center justify-center w-9 h-9 rounded-full
                            text-sm font-semibold
-                           cursor-pointer">
+                           cursor-pointer"
+          onClick={handleLogout}                 
+          >
           <svg xmlns="http://www.w3.org/2000/svg" 
             fill="none" viewBox="0 0 24 24" 
             strokeWidth={1.5} stroke="currentColor"

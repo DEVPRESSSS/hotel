@@ -26,7 +26,7 @@ export function useRoomType(){
         if(!confirm) return;
 
         const response = await deleteRoomType(id);
-        toast.success(response.message);
+        toast.success(response.data.message);
         setRoomType(prev =>prev.filter(rt =>rt.roomTypeId  !== id));
     };
 
