@@ -57,7 +57,7 @@ export function PermissionFormPage() {
                 success = await createPermission(formData);
             }
             navigate("/permission");
-            toast.success(`${success.message}`);
+            toast.success(`${success.data.message}`);
 
         } catch (error) {
             toast.error(`${error.message}`);

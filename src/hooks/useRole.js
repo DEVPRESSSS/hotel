@@ -22,7 +22,7 @@ export function useRole(){
         if(!confirm) return;
 
         const response = await deleteRole(id);
-        toast.success(response.message);
+        toast.success(response.data.message);
         
         setRoles(prev => prev.filter(role => role.roleId !== id));
     };

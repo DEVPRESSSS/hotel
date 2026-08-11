@@ -57,7 +57,7 @@ export function RoleFormPage() {
                 success = await createRole(formData);
             }
             navigate("/role");
-            toast.success(`${success.message}`);
+            toast.success(`${success.data.message}`);
 
         } catch (error) {
             toast.error(`${error.message}`);
