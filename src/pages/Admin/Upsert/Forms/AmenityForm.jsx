@@ -1,72 +1,21 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
-import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
-import { useGoBack } from "../../../../hooks/usePrevPage";
-import { createAmenity, getAmenityById, updateAmenity } from "../../../../api/amenityApi";
+import { useAmenityForm } from "../../../../hooks/useAmenityForm";
+
 
 export function AmenityFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
 
-    const navigate = useNavigate();
+    const {formData,
+        handleChange,
+        handleSubmit,
+        cancel,
+        errors
+    } = useAmenityForm();
+        
     
-    //Put the inputs in the UseState
-    const [formData, setFormData] = useState({
-       name: "",
-    });
-
-    //Handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) =>({
-            ...prev,
-            [name] : value
-        }));
-    };
-
-    //Get the Id of the Permission
-    const {id} = useParams();
-    useEffect(() => {
-        if (!id) return; 
-
-        const fetchAmenity = async () => {
-            try {
-                const amenityObj = await getAmenityById(id);
-                setFormData({
-                    name: amenityObj.name,   
-                });
-            } catch (error) {
-                toast.error(`${error.message}`);
-            }
-        };
-
-        fetchAmenity();
-    }, [id]);
-
-    //Handle submit 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            let success;
-            if (id) {
-                success = await updateAmenity(id, formData);
-            } else {
-                success = await createAmenity(formData);
-            }
-            navigate("/amenity");
-            toast.success(`${success.data.message}`);
-
-        } catch (error) {
-            toast.error(`${error.message}`);
-
-        }
-    };
-    //Handle cancel button
-    const cancel = useGoBack();
-
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
             {/* Header */}
@@ -91,6 +40,11 @@ export function AmenityFormPage() {
                                      value={formData.name}
                                     onChange= {handleChange}
                                     placeholder="eg. Free wifi" />
+                                    {errors.name && (
+                                        <p className="mt-1 text-sm text-red-600">
+                                            {errors.name}
+                                        </p>
+                                    )}
                         </div>
                         
                     </div>
