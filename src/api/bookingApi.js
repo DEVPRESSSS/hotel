@@ -1,8 +1,12 @@
-import { apiFetch } from "./apiClient";
+import { generatIdempotentKey } from "../utils/idempotentKeyGenerator";
+import api from "./apiClient";
 
-export function confirmBooking(data) {
-    return apiFetch("products/confirm-booking", {
-        method: "POST",
-        body:data,
+export async function confirmBooking(data) {
+    const idempotentkey = await generatIdempotentKey();
+    return api.post("bookings/confirm-booking",
+        data,{
+            headers:{
+                "Idempotency-Key": idempotentkey
+            }
     });
 }

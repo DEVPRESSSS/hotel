@@ -1,95 +1,23 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation } from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
 import { DropdownInput } from "../../../../components/Forms/DropdownInput";
-import { useRoomType } from "../../../../hooks/useRoomType";
-import { useFloor } from "../../../../hooks/useFloor";
-import { useEffect, useMemo, useState } from "react";
-import { createRoom, getRoomById, updateRoom } from "../../../../api/roomApi";
-import { toast } from 'react-toastify';
-import { useGoBack } from "../../../../hooks/usePrevPage";
+import { useRoomForm } from "../../../../hooks/useRoomForm";
+
 
 export function RoomFormPage() {
+
     const location = useLocation();
     const entityName = location.state?.entityName || "";
-
-    const navigate = useNavigate();
     
-    //Fetch room types from API with the use of useMemo
-    const { roomTypes } = useRoomType();
-    const roomTypesValue = useMemo(
-        () => roomTypes.map(rt => ({ id: rt.roomTypeId, name: rt.roomTypeName })),
-        [roomTypes]
-    );
-    //Fetch floors from API with the use of useFloor
-    const {floors} = useFloor();
-    const floorsValue = useMemo(
-        () => floors.map(rt => ({ id: rt.floorId, name: rt.floorName })),
-        [floors]
-    );
-
-    //Put the inputs in the UseState
-    const [formData, setFormData] = useState({
-       roomNumber: "",
-       capacity: "",
-       roomTypeId : "" ,
-       floorId : ""
-    });
-
-    //Handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) =>({
-            ...prev,
-            [name] : value
-        }));
-    };
-
-    //Get the Id of the Room
-    const {id} = useParams();
-    useEffect(() => {
-        if (!id) return; 
-
-        const fetchRoom = async () => {
-            try {
-                const roomObj = await getRoomById(id);
-                setFormData({
-                    roomNumber: roomObj.roomNumber,
-                    capacity: roomObj.capacity,
-                    roomTypeId: roomObj.roomTypeId,
-                    floorId: roomObj.floorId
-                });
-            } catch (error) {
-                toast.error(`${error.message}`);
-            }
-        };
-
-        fetchRoom();
-    }, [id]);
-
-    //Handle submit 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            let success;
-
-            if (id) {
-                success = await updateRoom(id, formData);
-            } else {
-                success = await createRoom(formData);
-            }
-
-            navigate("/room");
-            toast.success(success.data.message);
-
-        } catch (error) {
-            toast.error(error.message);
-        }
-    };
-    //Handle cancel button
-    const cancel = useGoBack();
-
+    const {formData,
+          roomTypesValue,
+          floorsValue,
+          handleChange,
+          handleSubmit,
+          cancel
+        } = useRoomForm();
+ 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
             {/* Header */}
