@@ -15,7 +15,8 @@ export function RoomFormPage() {
           floorsValue,
           handleChange,
           handleSubmit,
-          cancel
+          cancel,
+          errors
         } = useRoomForm();
  
     return (
@@ -42,16 +43,26 @@ export function RoomFormPage() {
                                      value={formData.roomNumber}
                                     onChange= {handleChange}
                                     placeholder="eg. ROOM-01" />
+                                    {errors.roomNumber && (
+                                        <p className="mt-1 text-sm text-red-600">
+                                            {errors.roomNumber}
+                                        </p>
+                                    )}
                         </div>
 
                         {/* Capacity */}
                         <div>
                             <LabelStyle name="Capacity" />
                             <TextInput name="capacity"
-                                      value={formData.capacity}
+                                       value={formData.capacity}
                                        onChange= {handleChange}
                                        placeholder="1" />
-                        </div>
+                                        {errors.capacity && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                {errors.capacity}
+                                            </p>
+                                        )}
+                            </div>
 
                         {/* Room Type */}
                         <div>
@@ -62,6 +73,11 @@ export function RoomFormPage() {
                                      value={formData.roomTypeId}
                                      onChange= {handleChange}
                                      optionValue={roomTypesValue} />
+                                      {errors.roomTypeId && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                {errors.roomTypeId}
+                                            </p>
+                                        )}
                         </div>
 
                         {/* Floor */}
@@ -73,6 +89,11 @@ export function RoomFormPage() {
                                     value={formData.floorId}
                                     onChange= {handleChange}
                                     optionValue={floorsValue}/>
+                                     {errors.floorId && (
+                                            <p className="mt-1 text-sm text-red-600">
+                                                {errors.floorId}
+                                            </p>
+                                        )}
                         </div>
                     </div>
                 </div>

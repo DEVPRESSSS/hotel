@@ -1,18 +1,37 @@
 import { useState } from "react";
 
-export function useForm(initialValues){
+export function useForm(initialValues, validate) {
 
-    const [formData, setFormData] =useState(initialValues);
+    const [formData, setFormData] = useState(initialValues);
+    const [errors, setErrors] = useState({});
 
-    const handleChange = (e) =>{
+    const handleChange = (e) => {
+        const { name, value } = e.target;
 
-        const {name,value}= e.target;
-        setFormData((prev)=>({
+        setFormData((prev) => ({
             ...prev,
-            [name] :value
-        }))
+            [name]: value
+        }));
 
+        setErrors((prev) => ({
+            ...prev,
+            [name]: ""
+        }));
     };
-    return {formData,setFormData,handleChange}
 
+    const validateForm = () => {
+        const validationErrors = validate(formData);
+
+        setErrors(validationErrors);
+
+        return Object.keys(validationErrors).length === 0;
+    };
+
+    return {
+        formData,
+        setFormData,
+        handleChange,
+        errors,
+        validateForm
+    };
 }

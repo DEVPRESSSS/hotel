@@ -7,6 +7,7 @@ import { useFloor } from "./useFloor";
 import { useForm } from "./useForm";
 import { useGoBack } from "./usePrevPage";
 
+import { validateRoom } from "../validations/roomValidation";
 import {
     createRoom,
     getRoomById,
@@ -23,13 +24,18 @@ export function useRoomForm() {
     const {
         formData,
         setFormData,
-        handleChange
-    } = useForm({
-        roomNumber: "",
-        capacity: "",
-        roomTypeId: "",
-        floorId: ""
-    });
+        handleChange,
+        errors,
+        validateForm,
+    } = useForm(
+        {
+            roomNumber: "",
+            capacity: "",
+            roomTypeId: "",
+            floorId: ""
+        },
+        validateRoom
+    );
 
     const { roomTypes } = useRoomType();
     const roomTypesValue = useMemo(
@@ -78,6 +84,10 @@ export function useRoomForm() {
         try {
             let response;
 
+            if(!validateForm()){
+                return;
+            }
+
             if (id) {
                 response = await updateRoom(id, formData);
             } else {
@@ -98,6 +108,7 @@ export function useRoomForm() {
         floorsValue,
         handleChange,
         handleSubmit,
-        cancel
+        cancel,
+        errors
     };
 }
