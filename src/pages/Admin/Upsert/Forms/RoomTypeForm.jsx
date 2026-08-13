@@ -1,72 +1,19 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
-import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
-import { useGoBack } from "../../../../hooks/usePrevPage";
-import { createRoomType, getRoomTypeId, updateRoomType } from "../../../../api/roomType";
+import { useRoomTypeForm } from "../../../../hooks/useRoomTypeForm";
 
 export function RoomTypeFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
 
-    const navigate = useNavigate();
+    const {formData,
+        handleChange,
+        handleSubmit,
+        cancel,
+        errors
+    } = useRoomTypeForm();
     
-    //Put the inputs in the UseState
-    const [formData, setFormData] = useState({
-       roomTypeName: "",
-       pricePerNight: ""
-    });
-
-    //Handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) =>({
-            ...prev,
-            [name] : value
-        }));
-    };
-
-    //Get the Id of the Permission
-    const {id} = useParams();
-    useEffect(() => {
-        if (!id) return; 
-
-        const fetchRoomType = async () => {
-            try {
-                const roomTypeObj = await getRoomTypeId(id);
-                setFormData({
-                    roomTypeName: roomTypeObj.roomTypeName,   
-                    pricePerNight: roomTypeObj.pricePerNight,   
-                });
-            } catch (error) {
-                toast.error(`${error.message}`);
-            }
-        };
-
-        fetchRoomType();
-    }, [id]);
-
-    //Handle submit 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            let success;
-            if (id) {
-                success = await updateRoomType(id, formData);
-            } else {
-                success = await createRoomType(formData);
-            }
-            navigate("/roomtype");
-            toast.success(`${success.data.message}`);
-
-        } catch (error) {
-            toast.error(`${error.message}`);
-        }
-    };
-    //Handle cancel button
-    const cancel = useGoBack();
 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
@@ -92,6 +39,11 @@ export function RoomTypeFormPage() {
                                      value={formData.roomTypeName}
                                     onChange= {handleChange}
                                     placeholder="eg. Deluxe" />
+                                    {errors.roomTypeName && (
+                                        <p className="mt-1 text-sm text-red-600">
+                                            {errors.roomTypeName}
+                                        </p>
+                                    )}
                         </div>
                         
                         {/* Permission Name */}
@@ -101,6 +53,12 @@ export function RoomTypeFormPage() {
                                      value={formData.pricePerNight}
                                     onChange= {handleChange}
                                     placeholder="eg. 400" />
+                                    {errors.pricePerNight && (
+                                        <p className="mt-1 text-sm text-red-600">
+                                            {errors.pricePerNight}
+                                        </p>
+                                    )}
+                                
                         </div>
                     </div>
                 </div>
