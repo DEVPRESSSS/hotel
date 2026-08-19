@@ -68,7 +68,7 @@ export function RoomFormPage() {
                         <div>
                             <LabelStyle name="Room Type" />
                             <DropdownInput 
-                                    nameFor="room type"
+                                     nameFor="room type"
                                      name="roomTypeId"
                                      value={formData.roomTypeId}
                                      onChange= {handleChange}
