@@ -2,6 +2,7 @@ import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
 import { useRoomTypeForm } from "../../../../hooks/useRoomTypeForm";
+import { RequiredFormPage } from "../../../../components/Errors/FormRequired";
 
 export function RoomTypeFormPage() {
     const location = useLocation();
@@ -39,11 +40,8 @@ export function RoomTypeFormPage() {
                                      value={formData.roomTypeName}
                                     onChange= {handleChange}
                                     placeholder="eg. Deluxe" />
-                                    {errors.roomTypeName && (
-                                        <p className="mt-1 text-sm text-red-600">
-                                            {errors.roomTypeName}
-                                        </p>
-                                    )}
+                                    <RequiredFormPage nameOfError={errors.roomTypeName}/>
+                                   
                         </div>
                         
                         {/* Permission Name */}
@@ -53,11 +51,8 @@ export function RoomTypeFormPage() {
                                      value={formData.pricePerNight}
                                     onChange= {handleChange}
                                     placeholder="eg. 400" />
-                                    {errors.pricePerNight && (
-                                        <p className="mt-1 text-sm text-red-600">
-                                            {errors.pricePerNight}
-                                        </p>
-                                    )}
+                                    <RequiredFormPage nameOfError={errors.pricePerNight}/>
+
                                 
                         </div>
                     </div>
