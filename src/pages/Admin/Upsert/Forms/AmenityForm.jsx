@@ -2,6 +2,7 @@ import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
 import { useAmenityForm } from "../../../../hooks/useAmenityForm";
+import { RequiredFormPage } from "../../../../components/Errors/FormRequired";
 
 
 export function AmenityFormPage() {
@@ -40,11 +41,7 @@ export function AmenityFormPage() {
                                      value={formData.name}
                                     onChange= {handleChange}
                                     placeholder="eg. Free wifi" />
-                                    {errors.name && (
-                                        <p className="mt-1 text-sm text-red-600">
-                                            {errors.name}
-                                        </p>
-                                    )}
+                                   <RequiredFormPage nameOfError={errors.name}/>
                         </div>
                         
                     </div>
