@@ -1,71 +1,20 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
-import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
-import { useGoBack } from "../../../../hooks/usePrevPage";
-import { createPermission, getPermissionById, updatePermission } from "../../../../api/permissionApi";
+import { usePermissionForm } from "../../../../hooks/usePermissionForm";
+import { RequiredFormPage } from "../../../../components/Errors/FormRequired";
+
 
 export function PermissionFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
 
-    const navigate = useNavigate();
-    
-    //Put the inputs in the UseState
-    const [formData, setFormData] = useState({
-       name: "",
-    });
-
-    //Handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) =>({
-            ...prev,
-            [name] : value
-        }));
-    };
-
-    //Get the Id of the Permission
-    const {id} = useParams();
-    useEffect(() => {
-        if (!id) return; 
-
-        const fetchPermission = async () => {
-            try {
-                const permissionObj = await getPermissionById(id);
-                setFormData({
-                    name: permissionObj.name,   
-                });
-            } catch (error) {
-                toast.error(`${error.message}`);
-            }
-        };
-
-        fetchPermission();
-    }, [id]);
-
-    //Handle submit 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            let success;
-            if (id) {
-                success = await updatePermission(id, formData);
-            } else {
-                success = await createPermission(formData);
-            }
-            navigate("/permission");
-            toast.success(`${success.data.message}`);
-
-        } catch (error) {
-            toast.error(`${error.message}`);
-
-        }
-    };
-    //Handle cancel button
-    const cancel = useGoBack();
+    const {formData,
+            handleChange,
+            handleSubmit,
+            cancel,
+            errors
+        } = usePermissionForm();
 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
@@ -86,11 +35,12 @@ export function PermissionFormPage() {
                
                         {/* Permission Name */}
                         <div>
-                            <LabelStyle name="Name" />
+                            <LabelStyle name="Permission name" />
                             <TextInput name="name"
                                      value={formData.name}
                                     onChange= {handleChange}
-                                    placeholder="eg. ROOM-01" />
+                                    placeholder="eg. view.rooms" />
+                                    <RequiredFormPage nameOfError={errors.name}/>
                         </div>
 
                     </div>

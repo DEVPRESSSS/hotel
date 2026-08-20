@@ -5,11 +5,11 @@ export function validateRoomAmenity(formData) {
 
     // Validate room 
     if (!formData.roomId) {
-        errors.roomId = "RoomId is required.";
+        errors.roomId = "Room is required.";
     }
     //Validate amenityId
      if (!formData.amenityId) {
-        errors.amenityId = "AmenityId is required.";
+        errors.amenityId = "Amenity is required.";
     }
 
     return errors;

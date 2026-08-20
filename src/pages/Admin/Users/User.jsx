@@ -1,5 +1,4 @@
 import { DataTablePage } from "../../../components/Table/ReactDataTable";
-import { ActionButtonComponent } from "../../../components/Buttons/ActionButton";
 import { TableWrapperPage } from "../../../components/Table/TableWrapper";
 import {CreateButton} from "../../../components/Buttons/CreateButton"
 import { useRedirect } from "../../../hooks/useCustomNavigate";
@@ -14,7 +13,7 @@ export function UserPage(){
         email: u.email,
         roleName: u.roleName,
         isActive: u.isActive ? (
-            <p className="bg-green-700  text-white text-sm rounded-lg px-2 py-1 text-center">
+            <p className="bg-green-800  text-white rounded-lg px-2 py-1 text-center">
                 Active
             </p>
         ) : (
@@ -24,9 +23,7 @@ export function UserPage(){
         ),        
         createdAt: u.createdAt ? new Date(u.createdAt).toISOString().split("T")[0] : "",
     
-        updatedAt: u.updatedAt ? new Date(u.updatedAt).toISOString().split("T")[0] : "",
-        action:<ActionButtonComponent 
-                onDelete={() => alert(`Are you sure you want to delete this one?${u.fullName}`)}/>        
+        updatedAt: u.updatedAt ? new Date(u.updatedAt).toISOString().split("T")[0] : ""     
     }));
 
     const columns = [
