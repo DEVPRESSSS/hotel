@@ -1,30 +1,29 @@
 
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
 
-export function getRolePermissions() {
-    return apiFetch("role-permissions");
+export async function getRolePermissions() {
+    const { data } = await api.get("/role-permissions");
+    return data;
 }
 
-export function getRolePermissionById(id) {
-    return apiFetch(`role-permissions/${id}`);
+export async function getRolePermissionById(id) {
+    const {data} = await api.get(`role-permissions/${id}`);
+    return  data;
 }
 
 export function createRolePermission(data) {
-    return apiFetch("role-permissions", {
-        method: "POST",
-        body: data,
-    });
+
+    const response =  api.post("/role-permissions", data);
+    return response;
 }
 
 export function updateRolePermission(id, data) {
-    return apiFetch(`role-permissions/${id}`, {
-        method: "PUT",
-        body: data,
-    });
+    const response =  api.put(`role-permissions/${id}`,data);
+    return response;
 }
 
 export function deleteRolePermission(id) {
-    return apiFetch(`role-permissions/${id}`, {
-        method: "DELETE",
-    });
+      return api.delete(`role-permissions/${id}`);
+
 }
+

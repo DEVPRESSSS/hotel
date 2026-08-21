@@ -29,7 +29,7 @@ export function useRoleForm(){
     useEffect(() => {
         if (!id) return;
 
-        const fetchRoom = async () => {
+        const fetchRole = async () => {
             try {
                 const a = await getRoleById(id);
 
@@ -42,7 +42,7 @@ export function useRoleForm(){
             }
         };
 
-        fetchRoom();
+        fetchRole();
     }, [id, setFormData]);
 
     const handleSubmit = async (e) => {

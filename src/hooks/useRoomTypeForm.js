@@ -32,7 +32,7 @@ export function useRoomTypeForm(){
     useEffect(() => {
         if (!id) return;
 
-        const fetchRoom = async () => {
+        const fetchRoomType = async () => {
             try {
                 const rt = await getRoomTypeId(id);
 
@@ -46,7 +46,7 @@ export function useRoomTypeForm(){
             }
         };
 
-        fetchRoom();
+        fetchRoomType();
     }, [id, setFormData]);
 
     const handleSubmit = async (e) => {

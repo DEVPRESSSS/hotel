@@ -29,7 +29,7 @@ export function usePermissionForm(){
     useEffect(() => {
         if (!id) return;
 
-        const fetchRoom = async () => {
+        const fetchPermission = async () => {
             try {
                 const a = await getPermissionById(id);
 
@@ -42,7 +42,7 @@ export function usePermissionForm(){
             }
         };
 
-        fetchRoom();
+        fetchPermission();
     }, [id, setFormData]);
 
     const handleSubmit = async (e) => {

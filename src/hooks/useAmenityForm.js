@@ -29,7 +29,7 @@ export function useAmenityForm(){
     useEffect(() => {
         if (!id) return;
 
-        const fetchRoom = async () => {
+        const fetchAmenity = async () => {
             try {
                 const a = await getAmenityById(id);
 
@@ -42,7 +42,7 @@ export function useAmenityForm(){
             }
         };
 
-        fetchRoom();
+        fetchAmenity();
     }, [id, setFormData]);
 
     const handleSubmit = async (e) => {
