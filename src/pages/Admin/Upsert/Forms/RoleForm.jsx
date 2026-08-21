@@ -1,71 +1,21 @@
-import { useLocation, useNavigate, useParams } from "react-router-dom"
+import { useLocation} from "react-router-dom"
 import { TextInput } from "../../../../components/Forms/TextInput";
 import { LabelStyle } from "../../../../components/Forms/LabelStyle";
-import { useEffect, useState } from "react";
-import { toast } from 'react-toastify';
-import { useGoBack } from "../../../../hooks/usePrevPage";
-import { createRole, getRoleById, updateRole } from "../../../../api/roleApi";
+import { useRoleForm } from "../../../../hooks/useRoleForm";
+import { RequiredFormPage } from "../../../../components/Errors/FormRequired";
+
+
 
 export function RoleFormPage() {
     const location = useLocation();
     const entityName = location.state?.entityName || "";
 
-    const navigate = useNavigate();
-    
-    //Put the inputs in the UseState
-    const [formData, setFormData] = useState({
-       roleName: "",
-    });
-
-    //Handle change
-    const handleChange = (e) => {
-        const {name, value} = e.target;
-        setFormData((prev) =>({
-            ...prev,
-            [name] : value
-        }));
-    };
-
-    //Get the Id of the Permission
-    const {id} = useParams();
-    useEffect(() => {
-        if (!id) return; 
-
-        const fetchRole = async () => {
-            try {
-                const roleObj = await getRoleById(id);
-                setFormData({
-                    roleName: roleObj.roleName,   
-                });
-            } catch (error) {
-                toast.error(`${error.message}`);
-            }
-        };
-
-        fetchRole();
-    }, [id]);
-
-    //Handle submit 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        try {
-            let success;
-            if (id) {
-                success = await updateRole(id, formData);
-            } else {
-                success = await createRole(formData);
-            }
-            navigate("/role");
-            toast.success(`${success.data.message}`);
-
-        } catch (error) {
-            toast.error(`${error.message}`);
-
-        }
-    };
-    //Handle cancel button
-    const cancel = useGoBack();
+    const {     formData,
+                handleChange,
+                handleSubmit,
+                cancel,
+                errors
+            } = useRoleForm();
 
     return (
         <div className="w-full mx-auto bg-white shadow-md rounded-xl border-t-4 border-teal-700 overflow-hidden">
@@ -84,13 +34,14 @@ export function RoleFormPage() {
                 <div className="px-6 py-6">
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
                
-                        {/* Room type Name */}
+                        {/*Role Name */}
                         <div>
                             <LabelStyle name="Role Name" />
                             <TextInput name="roleName"
                                      value={formData.roleName}
                                     onChange= {handleChange}
-                                    placeholder="eg. FrontDesk" />
+                                    placeholder="eg. FrontDesk/Admin" />
+                                    <RequiredFormPage nameOfError={errors.name}/>
                         </div>
                         
                     </div>
