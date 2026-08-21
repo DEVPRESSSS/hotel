@@ -13,6 +13,8 @@ export function ProductPage() {
       return;
     navigate(`/viewselectedproduct/${id}`);
   };
+
+  
   return (
     <section className="bg-white">
       <div className="max-w-7xl mx-auto px-4 py-12 md:py-20">

@@ -1,13 +1,14 @@
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
 
-export function getProducts() {
-    return apiFetch("products");
+export async function getProducts() {
+    const response = await api.get("/products");
+    return response.data;
 }
 
 export function getRoomByRoomTypeId(id) {
-    return apiFetch(`products/${id}`);
+    return api.get(`products/${id}`);
 }
 export function getChosenRoomById(id){
-     return apiFetch(`products/selected-room/${id}`)
+     return api.get(`products/selected-room/${id}`)
 }
 

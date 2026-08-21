@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
-  { title: "Product", path: "/product" },
+  { title: "Home", path: "/guestdashboard" },
 ];
 
 export function NavBarGuest() {

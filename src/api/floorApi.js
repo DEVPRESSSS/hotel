@@ -1,5 +1,5 @@
-import { apiFetch } from "./apiClient";
+import api from "./apiClient";
 
 export async function fetchFloor(){
-    return apiFetch("floors")
+    return api.get("floors")
 }

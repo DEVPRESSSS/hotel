@@ -26,6 +26,8 @@ import { RoomAmenityPage } from './pages/Admin/Room/RoomAmenity';
 import { AmenityPage } from './pages/Admin/Room/Amenity';
 import { SelectedRoomPage } from './pages/SelectedRoom';
 import { GuestLayout } from './Layout/GuestLayout';
+import { ProtectedRoute } from './components/Routing/ProtectedRoute';
+import { UnauthorizedPage } from './pages/Errors/Unauthorized';
 
 export default function App() {
   return (
@@ -33,11 +35,16 @@ export default function App() {
       <BrowserRouter>
               <Routes>
                 <Route element = { <GuestLayout/>}>
-                    <Route path="/product" element ={<ProductPage/>} />
-                    <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
-                    <Route path= "/selectedroom/:id?" element = {<SelectedRoomPage/>}/>
-                 
+                    <Route path="/guestdashboard" element = {
+                      <ProtectedRoute allowedRoles={["Customer"]}>
+                          <GuestDashboardPage/>
+                      </ProtectedRoute>
+                    }/> 
                 </Route>
+
+                <Route path="/unauthorized"
+                     element = {<UnauthorizedPage/>}/>     
+
                 <Route element = { <PublicLayout/>}>
                     <Route path="/" element = {<HomePage/>} />
                     <Route path="/about" element={<AboutPage/>}/>
@@ -49,12 +56,16 @@ export default function App() {
                     <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
                     <Route path= "/selectedroom/:id?" element = {<SelectedRoomPage/>}/>
                 </Route>
+                
                 <Route element = {<AdminLayout/>}>
                     {/*Pages*/}
                     <Route path="/room" element ={<RoomPage/>} />
                     <Route path="/addroom" element ={<AboutPage/>} />
-                    <Route path="/dashboard" element ={<DashboardOverviewPage/>} />
-                    <Route path="/guestdashboard" element ={<GuestDashboardPage/>} />
+                    <Route path="/dashboard" 
+                          element ={<ProtectedRoute allowedRoles={["Admin"]}>
+                          <DashboardOverviewPage/>
+                      </ProtectedRoute>} />
+            
                     <Route path="/permission" element ={<PermissionPage/>} />
                     <Route path="/booking" element ={<BookingPage/>} />            
                     <Route path="/user" element ={<UserPage/>} />

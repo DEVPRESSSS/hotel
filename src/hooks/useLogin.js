@@ -1,17 +1,20 @@
 // hooks/useLogin.js
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { login, logout} from "../api/authApi";
+import { login, logout } from "../api/authApi";
 import { toast } from "react-toastify";
-//import { login } from "../services/authService";
+import { useAuth } from "../context/useAuth"; //
 
 export function useLogin() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { setUser } = useAuth(); 
 
   async function handleSubmit(e) {
+
     e.preventDefault();
+
     setLoading(true);
     setError(null);
 
@@ -19,19 +22,17 @@ export function useLogin() {
     const password = e.target.password.value;
 
     try {
-      const response = await login({    
-        email,
-        password
-      });
+      const response = await login({ email, password });
 
-      //Decide base on the role
-      if(response.roleName === "Admin"){
-          navigate("/dashboard");
-      }else if(response.roleName === "Customer"){
-          navigate("/product");
+      setUser(response); 
+
+      if (response.roleName === "Admin") {
+        navigate("/dashboard");
+      } else if (response.roleName === "Customer") {
+        navigate("/guestdashboard");
       }
     } catch (err) {
-        toast.error(`${err.message}`);
+      toast.error(`${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -40,17 +41,20 @@ export function useLogin() {
   return { handleSubmit, loading, error };
 }
 
-export function useLogOut(){
+export function useLogOut() {
+
   const navigate = useNavigate();
+  const { setUser } = useAuth();
 
   async function handleLogout(e) {
     e.preventDefault();
 
-    logout();
-    toast.success("Log out success fully!");
+    await logout();
+    setUser(null); 
+
+    toast.success("Log out successfully!");
     navigate("/login");
-  
   }
-    
-  return {handleLogout}
+
+  return { handleLogout };
 }
