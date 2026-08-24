@@ -86,15 +86,7 @@ export function RegisterPage(){
                 Register
              </button>
            </form>
- 
-           {/* Register */}
-           {/* <div className="mt-6 text-center text-sm text-gray-500">
-             Don't have an account?{" "}
-             <Link to="/register" className="font-medium text-teal-700 hover:underline">
-               Register here
-             </Link>
-           </div> */}
- 
+
          </div>
        </div>
      </section>

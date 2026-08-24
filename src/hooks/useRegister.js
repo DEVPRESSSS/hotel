@@ -24,7 +24,7 @@ export function useRegister() {
 
         try {
             const result = await register(data);
-
+            console.log(result);
             if (!result) {
                 toast.error("Failed to register. Please try again!");
                 return;
@@ -34,7 +34,8 @@ export function useRegister() {
             navigate("/login");
 
         } catch (error) {
-            toast.error(error.message || "Registration failed!");
+            const message = error.response?.data?.message || "Registration failed!";
+            toast.error(message);
         }
     }
 
