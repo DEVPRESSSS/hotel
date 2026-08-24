@@ -8,7 +8,6 @@ export function LoginPage() {
    <section className="flex items-center justify-center p-6">
     <div className="flex w-full max-w-2xl overflow-hidden rounded-2xl bg-white">
       <div className="flex flex-1 flex-col justify-center p-8">
-      {/* rest unchanged */}
 
           {/* Header */}
           <div className="mb-8">

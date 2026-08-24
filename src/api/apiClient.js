@@ -31,7 +31,7 @@ api.interceptors.response.use(
                return api(originalRequest);
 
             } catch {
-               window.location.href = "/login";
+               return Promise.reject(error);
             }
       }
       return Promise.reject(error);
