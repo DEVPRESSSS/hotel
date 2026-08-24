@@ -10,10 +10,10 @@ export function RegisterPage(){
            {/* Header */}
            <div className="mb-8">
              <h1 className="text-3xl text-center font-bold text-gray-800">
-               Welcome Back
+               Create you account
              </h1>
              <p className="mt-2 text-sm text-center text-gray-500">
-               Sign in to continue to your account.
+               Fill up all the fields
              </p>
            </div>
  
@@ -25,7 +25,7 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="firstName"
-                 placeholder="FirstName"
+                 placeholder="First name"
                  className="w-full outline-none"
                />
              </div>
@@ -36,7 +36,7 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="middleName"
-                 placeholder="middleName"
+                 placeholder="Middle name"
                  className="w-full outline-none"
                />
              </div>
@@ -47,7 +47,7 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="lastName"
-                 placeholder="lastName"
+                 placeholder="Last name"
                  className="w-full outline-none"
                />
              </div>
@@ -78,7 +78,10 @@ export function RegisterPage(){
              {/* Submit */}
              <button
                type="submit"
-               className="w-full rounded-lg bg-teal-700 py-3 font-medium text-white transition hover:bg-teal-800 disabled:opacity-60"
+               className="w-full rounded-lg bg-teal-700 
+                  py-3 font-medium 
+                  cursor-pointer
+                  text-white transition hover:bg-teal-800 disabled:opacity-60"
              >
                 Register
              </button>
