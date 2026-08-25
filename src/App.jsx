@@ -28,12 +28,15 @@ import { SelectedRoomPage } from './pages/SelectedRoom';
 import { GuestLayout } from './Layout/GuestLayout';
 import { ProtectedRoute } from './components/Routing/ProtectedRoute';
 import { UnauthorizedPage } from './pages/Errors/Unauthorized';
+import { ForgotPasswordPage } from './pages/Auth/ForgotPassword';
 
 export default function App() {
   return (
     <>
       <BrowserRouter>
               <Routes>
+                //#region--Guest Layout Region 
+                {/* Guest Layout ProtectedRoute */}
                 <Route element = { <GuestLayout/>}>
                     <Route path="/guestdashboard" element = {
                       <ProtectedRoute allowedRoles={["Customer"]}>
@@ -41,47 +44,66 @@ export default function App() {
                       </ProtectedRoute>
                     }/> 
                 </Route>
+                //#endregion
 
+                {/* Unauthorized Page */}
                 <Route path="/unauthorized"
                      element = {<UnauthorizedPage/>}/>     
 
+                //#region--Public Layout Region
+                {/* Default Layout */}
                 <Route element = { <PublicLayout/>}>
                     <Route path="/" element = {<HomePage/>} />
                     <Route path="/about" element={<AboutPage/>}/>
                     <Route path="/book" element={<BookPage/>}/>
                     <Route path="/services" element={<ServicePage/>}/>
                     <Route path="/product" element ={<ProductPage/>} />
+                    <Route path="/forgotpassword" element ={<ForgotPasswordPage/>} />
                     <Route path="/login" element ={<LoginPage/>} />
                     <Route path="/register" element ={<RegisterPage/>} />
                     <Route path= "/viewselectedproduct/:id?" element = {<ViewSelectedPage/>}/>
                     <Route path= "/selectedroom/:id?" element = {<SelectedRoomPage/>}/>
                 </Route>
-                
-                <Route element = {<AdminLayout/>}>
-                    {/*Pages*/}
-                    <Route path="/room" element ={<RoomPage/>} />
-                    <Route path="/addroom" element ={<AboutPage/>} />
-                    <Route path="/dashboard" 
-                          element ={<ProtectedRoute allowedRoles={["Admin"]}>
-                          <DashboardOverviewPage/>
-                      </ProtectedRoute>} />
-            
-                    <Route path="/permission" element ={<PermissionPage/>} />
-                    <Route path="/booking" element ={<BookingPage/>} />            
-                    <Route path="/user" element ={<UserPage/>} />
-                    <Route path="/roomtype" element ={<RoomTypePage/>} />
-                    <Route path="/role" element ={<RolePage/>} />
-                    <Route path="/roomamenity" element ={<RoomAmenityPage/>} />
-                    <Route path="/amenity" element ={<AmenityPage/>} />
-                    <Route path="/rolepermission" element ={<RolePermissionPage/>} />
+                //#endregion
 
-                    {/*Upsert Form Page*/}
+                {/* Admin Protected Route */}
+                <Route
+                    element={
+                        <ProtectedRoute allowedRoles={["Admin"]}>
+                            <AdminLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/room"
+                        element={<RoomPage />} />
+                    <Route path="/addroom" 
+                        element={<AboutPage />} />
+                    <Route path="/dashboard" 
+                        element={<DashboardOverviewPage />} />
+                    <Route path="/permission" 
+                        element={<PermissionPage />} />
+                    <Route path="/booking" 
+                        element={<BookingPage />} />
+                    <Route path="/user" 
+                        element={<UserPage />} />
+                    <Route path="/roomtype"
+                        element={<RoomTypePage />} />
+                    <Route path="/role"
+                        element={<RolePage />} />
+                    <Route path="/roomamenity" 
+                        element={<RoomAmenityPage />} />
+                    <Route path="/amenity" 
+                        element={<AmenityPage />} />
+                    <Route path="/rolepermission"
+                        element={<RolePermissionPage />} />
                     <Route
                         path="/upsert/:entity/:id?"
                         element={<UpsertFormPage />}
-                    />                        
+                    />
                 </Route>
               </Routes>
+
+              {/* Toast Notification */}
               <ToastContainer
                 position="top-right"
                 autoClose={3000}
