@@ -1,9 +1,26 @@
 import { toast } from "react-toastify";
 import { register } from "../api/registerApi";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "./useForm";
+import { validateRegister } from "../validations/registerValidation";
 
 export function useRegister() {
     const navigate = useNavigate();
+    const {
+              formData,
+              handleChange,
+              errors,
+              validateForm,
+          } = useForm(
+              {
+                firstName : "",
+                middleName : "",
+                lastName: "",
+                email: "",
+                password: ""
+              },
+              validateRegister
+    );
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -22,9 +39,9 @@ export function useRegister() {
             password
         };
 
+        if(!validateForm()) return;
         try {
             const result = await register(data);
-            console.log(result);
             if (!result) {
                 toast.error("Failed to register. Please try again!");
                 return;
@@ -32,12 +49,12 @@ export function useRegister() {
 
             toast.success("Registered successfully!");
             navigate("/login");
-
-        } catch (error) {
-            const message = error.response?.data?.message || "Registration failed!";
-            toast.error(message);
+            
+        } catch {
+            toast.error("Registration failed");
         }
+    
     }
 
-    return { handleSubmit };
+    return { handleSubmit, errors, formData, handleChange };
 }

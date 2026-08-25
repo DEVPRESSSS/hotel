@@ -1,8 +1,9 @@
+import { RequiredFormPage } from "../../components/Errors/FormRequired";
 import { useRegister } from "../../hooks/useRegister";
 
 export function RegisterPage(){
   
-  const {handleSubmit} = useRegister();
+  const {handleSubmit, formData, errors, handleChange} = useRegister();
   return (
     <section className="flex items-center justify-center p-6">
      <div className="flex w-full max-w-2xl overflow-hidden rounded-2xl bg-white">
@@ -25,10 +26,14 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="firstName"
+                 value={formData.firstName}
                  placeholder="First name"
                  className="w-full outline-none"
+                 onChange={handleChange}
                />
              </div>
+              <RequiredFormPage nameOfError={errors.firstName}/>
+
 
             {/* MiddleName */}
              <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
@@ -36,10 +41,15 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="middleName"
+                 value={formData.middleName}
                  placeholder="Middle name"
                  className="w-full outline-none"
+                 onChange={handleChange}
+
                />
              </div>
+              <RequiredFormPage nameOfError={errors.middleName}/>
+
 
              {/* LastName */}
              <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
@@ -47,10 +57,14 @@ export function RegisterPage(){
                <input
                  type="text"
                  name="lastName"
+                 value={formData.lastName}
                  placeholder="Last name"
                  className="w-full outline-none"
+                 onChange={handleChange}
+
                />
              </div>
+              <RequiredFormPage nameOfError={errors.lastName}/>
 
              {/* Email */}
              <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
@@ -58,21 +72,27 @@ export function RegisterPage(){
                <input
                  type="email"
                  name="email"
+                 value={formData.email}
                  placeholder="Email address"
                  className="w-full outline-none"
+                 onChange={handleChange}
+
                />
              </div>
- 
+              <RequiredFormPage nameOfError={errors.email}/>
              {/* Password */}
              <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
         
                <input
                  type="password"
                  name="password"
+                 value={formData.password}
                  placeholder="Password"
                  className="w-full outline-none"
+                 onChange={handleChange}
                />
              </div>
+              <RequiredFormPage nameOfError={errors.password}/>
 
  
              {/* Submit */}
