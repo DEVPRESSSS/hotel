@@ -50,8 +50,8 @@ export function useRegister() {
             toast.success("Registered successfully!");
             navigate("/login");
             
-        } catch {
-            toast.error("Registration failed");
+        } catch (error){
+            toast.error(error.response.data.message);
         }
     
     }
