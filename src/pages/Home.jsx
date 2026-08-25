@@ -27,8 +27,7 @@ export function HomePage() {
                     <button className="group flex items-center 
                     justify-center gap-2 px-6 py-3 bg-teal-800
                     hover:bg-teal-700 transition-colors
-                    text-white font-semibold rounded-xl 
-                    shadow-lg shadow-teal-800/20
+                    text-white font-semibold rounded-xl
                     cursor-pointer">
                     <span>Book Now</span>
                     <svg

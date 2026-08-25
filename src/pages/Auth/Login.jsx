@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import { useLogin } from "../../hooks/useLogin";
+import { RequiredFormPage } from "../../components/Errors/FormRequired";
 
 export function LoginPage() {
-  const { handleSubmit, loading } = useLogin();
+  const { handleSubmit, handleChange, formData, errors, loading } = useLogin();
 
   return (
    <section className="flex items-center justify-center p-6">
@@ -38,10 +39,15 @@ export function LoginPage() {
               <input
                 type="email"
                 name="email"
+                value = {formData.email}
+                onChange= {handleChange}
                 placeholder="Email address"
                 className="w-full outline-none"
+                autoComplete="email"
+                required
               />
             </div>
+            <RequiredFormPage nameOfError={errors.email}/>
 
             {/* Password */}
             <div className="flex items-center rounded-lg border border-gray-300 px-4 py-3">
@@ -52,6 +58,7 @@ export function LoginPage() {
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
+                required
               >
                 <rect x="3" y="11" width="18" height="11" rx="2" />
                 <path d="M7 11V7a5 5 0 0 1 10 0v4" />
@@ -59,10 +66,14 @@ export function LoginPage() {
               <input
                 type="password"
                 name="password"
+                value={formData.password}
+                onChange= {handleChange}
                 placeholder="Password"
+                autoComplete="password"
                 className="w-full outline-none"
               />
             </div>
+            <RequiredFormPage nameOfError={errors.password}/>
 
             {/* Forgot Password */}
             <div className="flex justify-end">
