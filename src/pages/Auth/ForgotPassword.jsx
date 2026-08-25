@@ -1,6 +1,5 @@
-
 export function ForgotPasswordPage(){
-  
+
   return (
     <section className="flex items-center justify-center p-6">
      <div className="flex w-full max-w-2xl overflow-hidden rounded-2xl bg-white">
@@ -8,10 +7,10 @@ export function ForgotPasswordPage(){
            {/* Header */}
            <div className="mb-8">
              <h1 className="text-3xl text-center font-bold text-gray-800">
-              
+                Forgot Password
              </h1>
              <p className="mt-2 text-sm text-center text-gray-500">
-               Fill up all the fields
+               Input your email
              </p>
            </div>
  
@@ -22,9 +21,10 @@ export function ForgotPasswordPage(){
              
                <input
                  type="text"
-                 name="firstName"
-                 placeholder="First name"
+                 name="email"
+                 placeholder="example@gmail.com"
                  className="w-full outline-none"
+                 required
                />
              </div>
 
@@ -36,7 +36,7 @@ export function ForgotPasswordPage(){
                   cursor-pointer
                   text-white transition hover:bg-teal-800 disabled:opacity-60"
              >
-                Register
+                Reset
              </button>
            </form>
 
